@@ -10,13 +10,11 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous
 public class ParkingMiddle extends LinearOpMode {
-    // DcMotor backLeftMotor;
-    // DcMotor backRightMotor;
-    // DcMotor frontLeftMotor;
-    // DcMotor frontRightMotor;
-    // DcMotor armTilt;
-    // DcMotor armExtend;
-    // DcMotor claw;
+    DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
+    DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+    DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+    DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+    DcMotor extend = hardwareMap.dcMotor.get("linearSlide");
 
 
     BNO055IMU imu;
@@ -25,11 +23,11 @@ public class ParkingMiddle extends LinearOpMode {
 
         // // Declare our motors
         // // Make sure your ID's match your configuration
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-        DcMotor extend = hardwareMap.dcMotor.get("linearSlide");
+//        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
+//        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+//        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+//        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+//        DcMotor extend = hardwareMap.dcMotor.get("linearSlide");
         //Servo arm = hardwareMap.get(Servo.class, "arm");
         Servo claw = hardwareMap.get(Servo.class, "claw");
 
@@ -64,6 +62,23 @@ public class ParkingMiddle extends LinearOpMode {
 
 
         }
+    }
+    public void Forward(int power, int time) {
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        sleep(time);
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(-power);
+        sleep(10);
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+
     }
 
 
