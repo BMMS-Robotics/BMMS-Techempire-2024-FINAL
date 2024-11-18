@@ -58,7 +58,7 @@ public class TeleOp1P extends LinearOpMode {
             double backLeftPower = (y - x + rx) / denominator;
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
-            
+
             if (gamepad1.dpad_up) {
                 //extendPower = -1;
                 slideController.TARGET_POSITION_TICKS += 100;
