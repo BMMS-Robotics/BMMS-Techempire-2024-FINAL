@@ -38,6 +38,17 @@ public class TeleOp2P extends LinearOpMode {
         double desiredArmPos = 1;
         double slowMo = 2.5;
 
+        //Fun software limits with kaitlyn
+        double maxArmPosition = 0.9;
+        double minArmPosition = 0.5;
+        double armSpeed = 0.025;
+
+        double slowMoMax = 7.5;
+        double slowMoMin = 1.5;
+        double slowMoChangeSpeed = 0.5;
+
+        double linearSlideChangeSpeed = 100;
+
         waitForStart();
 
         if (isStopRequested()) return;
@@ -58,24 +69,18 @@ public class TeleOp2P extends LinearOpMode {
             double backLeftPower = (y - x + rx) / denominator;
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
-
-            //arm.setPower(0.5);
-
-            //double clawPower = gamepad1.right_trigger - gamepad1.left_trigger; // Takes input values of triggers (assuming values of 0-1) and subtracts
-
-            //double extendPower = 0;
             double armPower = 0;
 
 
             if (gamepad2.dpad_up) {
                 //extendPower = -1;
-                slideController.TARGET_POSITION_TICKS += 100;
+                slideController.TARGET_POSITION_TICKS += linearSlideChangeSpeed;
                 sleep(25);
                 //slideController.extendArm();
 
             } else if (gamepad2.dpad_down) {
                 //extendPower = 1;
-                slideController.TARGET_POSITION_TICKS -= 100;
+                slideController.TARGET_POSITION_TICKS -= linearSlideChangeSpeed;
                 sleep(25);
                 // slideController.retractArm();
 
@@ -96,33 +101,33 @@ public class TeleOp2P extends LinearOpMode {
 
             //Slowmo mode, maybe switch to triggers later?
             if (gamepad1.x) {
-                slowMo += 0.5;
+                slowMo += slowMoChangeSpeed;
                 sleep(25);
             }
             if (gamepad1.b) {
-                slowMo -= 0.5;
+                slowMo -= slowMoChangeSpeed;
                 sleep(25);
             }
-            if (slowMo > 7.5) {
-                slowMo = 7.5;
+            if (slowMo > slowMoMax) {
+                slowMo = slowMoMax;
             }
-            if (slowMo < 1.5) {
-                slowMo = 1.5;
+            if (slowMo < slowMoMin) {
+                slowMo = slowMoMin;
             }
 
             if (gamepad2.y) {
-                desiredArmPos += 0.025;
+                desiredArmPos += armSpeed;
                 sleep(25);
             } else if (gamepad2.a) {
-                desiredArmPos -= 0.025;
+                desiredArmPos -= armSpeed;
                 sleep(25);
             }
             //Limits to prevent claw from slamming against floor or robot
-            if (desiredArmPos > 0.9) {
-                desiredArmPos = 0.9;
+            if (desiredArmPos > maxArmPosition) {
+                desiredArmPos = maxArmPosition;
             }
-            if (desiredArmPos < 0.5) {
-                desiredArmPos = 0.5;
+            if (desiredArmPos < minArmPosition) {
+                desiredArmPos = minArmPosition;
             }
 
 
