@@ -17,7 +17,7 @@ public class ParkingMiddle extends LinearOpMode {
     DcMotor extend = hardwareMap.dcMotor.get("linearSlide");
 
     //Robot moves roughly 3.8ft/sec (45in/sec) (114cm for all you people who didn't land on the moon first) at 100% power according to my back-of-the-envelope math
-
+    //Henceforth moves 1 foot per 360ms
 
     BNO055IMU imu;
     @Override
@@ -47,7 +47,7 @@ public class ParkingMiddle extends LinearOpMode {
         while (opModeIsActive()) {
 
 
-            sleep(100);
+            //Move robot sideways
             frontLeftMotor.setPower(-0.5);
             backLeftMotor.setPower(0.5);
             frontRightMotor.setPower(0.5);
