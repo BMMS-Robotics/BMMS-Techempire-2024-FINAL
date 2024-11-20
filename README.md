@@ -1,2 +1,5 @@
 # BMMS-Techempire-2024-FINAL
- Updated android studio build for code
+The final, actual, real 12778 TECH EMPIRE Repo!
+<br>
+Feel free to PR for fixes or personal use just don't submit to upstream.
+
