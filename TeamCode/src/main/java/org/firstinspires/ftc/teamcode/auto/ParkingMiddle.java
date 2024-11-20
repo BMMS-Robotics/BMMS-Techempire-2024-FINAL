@@ -52,11 +52,12 @@ public class ParkingMiddle extends LinearOpMode {
 
             //Move robot sideways
             //720ms * 4 ft (2 tiles sideways) = 2280ms to end up 2 tiles to the left
+            //however keep in mind the physics of teleop may not be very happy with this
             frontLeftMotor.setPower(-0.5);
             backLeftMotor.setPower(0.5);
             frontRightMotor.setPower(0.5);
             backRightMotor.setPower(-0.5);
-            sleep(1750);
+            sleep(2280);
             frontLeftMotor.setPower(0.5);
             backLeftMotor.setPower(-0.5);
             frontRightMotor.setPower(-0.5);

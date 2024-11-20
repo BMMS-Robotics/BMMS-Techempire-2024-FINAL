@@ -147,14 +147,16 @@ public class TeleOp1P extends LinearOpMode {
             //extend.setPower(extendPower);
             slideController.stopIfReached();
             //Telemetry
+            //Slide
             telemetry.addData("Slide Target Position", LinearSlideController.TARGET_POSITION_TICKS);
             telemetry.addData("Slide Position", extend.getCurrentPosition());
             telemetry.addData("Slide Motor Power", extend.getPower());
             telemetry.addData("Slide Busy", extend.isBusy());
-            //experimental telemetry - has not been compiled
+            //Movement
             telemetry.addData("Forward Direction", y);
             telemetry.addData("Sideways Direction", x);
             telemetry.addData("Rotational Direction", rx);
+            //Arm
             //telemetry.addData("Arm Position", arm.getPosition);
             telemetry.addData("Desired Arm Position", desiredArmPos);
             //telemetry.addData("Claw", claw.getPosition);
@@ -162,7 +164,6 @@ public class TeleOp1P extends LinearOpMode {
             slideController.extendSlide();
             telemetry.update();
 
-            //sleep(25);
 
         }
 
