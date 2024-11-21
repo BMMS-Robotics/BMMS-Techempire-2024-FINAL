@@ -1,6 +1,13 @@
-package org.firstinspires.ftc.teamcode.teleop;
+/*package org.firstinspires.ftc.teamcode.teleop;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class GamepadHub {
 
@@ -30,18 +37,19 @@ public class GamepadHub {
     }
 
     public boolean slowDownButtonPressed() {
-        boolean result = (gamepad1.x == true);
-
-        // debounce for 25ms to prevent button smashing effects
-        sleep(25);
-        return result;
+//        boolean result = (gamepad1.x == true);
+//
+//        // debounce for 25ms to prevent button smashing effects
+//        //sleep(25);
+//        return result;
+          TeleOpV2.slowMo +=
     }
 
     public boolean speedUpButtonPressed() {
         boolean result =  (gamepad1.b == true);
 
         // debounce for 25ms to prevent button smashing effects
-        sleep(25);
+        //sleep(25);
         return result;
     }
 
@@ -53,4 +61,4 @@ public class GamepadHub {
     public boolean isCloseClawButtonPressed() {
         return secondaryController == null ? primaryController.left_trigger == 1 : secondaryController.left_trigger == 1;
     }
-}
+}*/

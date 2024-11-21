@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleop;
+/*package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -72,10 +72,12 @@ public class TeleOpV2 extends LinearOpMode {
             // CONTROL DRIVING
             if (gamepadHub.slowDownButtonPressed()) {
                 driveController.slowDown();
+                sleep(25);
             } else if (gamepadHub.speedUpButtonPressed()) {
                 driveController.speedUp();
+                sleep(25);
             }
-                driveController.drive(GamepadHub.getDriveX(slowMo), controllerHub.getDriveY(), controllerHub.getDriveRX());
+                driveController.drive(GamepadHub.getDriveX(slowMo), GamepadHub.getDriveY(), GamepadHub.getDriveRX());
 
             // CONTROL CLAW
             if (gamepadHub.isOpenClawButtonPressed()) {
@@ -128,4 +130,4 @@ public class TeleOpV2 extends LinearOpMode {
 
 
 
-}
+}*/

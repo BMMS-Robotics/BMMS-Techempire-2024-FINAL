@@ -36,13 +36,15 @@ public class TeleOp1P extends LinearOpMode {
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         double desiredArmPos = 1;
-        double slowMo = 2.5;
+
+
 
         //Fun software limits with kaitlyn
         double maxArmPosition = 0.9;
         double minArmPosition = 0.5;
         double armSpeed = 0.025;
 
+        double slowMo = 2.5; // Bigger = slower, smaller = faster. Changed using the X and B buttons
         double slowMoMax = 7.5;
         double slowMoMin = 1.5;
         double slowMoChangeSpeed = 0.5;
@@ -144,8 +146,7 @@ public class TeleOp1P extends LinearOpMode {
 
             //Arm
             arm.setPosition(desiredArmPos);
-            //extend.setPower(extendPower);
-            slideController.stopIfReached();
+            //extend.setPower(extendPower);w
             //Telemetry
             //Slide
             telemetry.addData("Slide Target Position", LinearSlideController.TARGET_POSITION_TICKS);
