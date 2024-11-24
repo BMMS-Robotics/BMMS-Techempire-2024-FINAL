@@ -5,4 +5,4 @@ Feel free to PR for fixes or personal use just don't submit to upstream.
 <br>
 <br>
 <br>
-No github, we are not using JavaScript and HTML.
+Now fixed user-specific build and gradle files thanks to @aspen404. If any future issues arise please create an issue <a href="https://github.com/BMMS-Robotics/BMMS-Techempire-2024-FINAL/issues/new">here</a>!
