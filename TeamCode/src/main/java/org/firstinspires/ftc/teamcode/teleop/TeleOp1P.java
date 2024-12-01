@@ -15,7 +15,7 @@ public class TeleOp1P extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        //Git dummy comment
+        //Git dummy commentw
         // Declare our motors
         // Make sure your ID's match your configuration
         DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
@@ -27,7 +27,8 @@ public class TeleOp1P extends LinearOpMode {
         extend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         extend.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Servo arm = hardwareMap.get(Servo.class, "arm");
-        Servo claw = hardwareMap.get(Servo.class, "claw");
+        Servo clawL = hardwareMap.get(Servo.class, "clawL");
+        Servo clawR = hardwareMap.get(Servo.class, "clawR");
 
 
         // Reverse the right side motors. This may be wrong for your setup.
@@ -36,11 +37,12 @@ public class TeleOp1P extends LinearOpMode {
         // See the note about this earlier on this page.
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         double desiredArmPos = 1;
         double slowMo = 2.5;
 
         //Fun software limits with kaitlyn
-        double maxArmPosition = 0.9;
+        double maxArmPosition = 0.85;
         double minArmPosition = 0.5;
         double armSpeed = 0.025;
 
@@ -90,12 +92,16 @@ public class TeleOp1P extends LinearOpMode {
             if (slideController.TARGET_POSITION_TICKS < 0) {
                 slideController.TARGET_POSITION_TICKS = 0;
             }
-
+            //Depending on which pos the claw is in we probably need to reverse the directions so it doesn't attempt to strangulate itself
             //Get the claw
-            if (gamepad1.right_trigger == 1) {
-                claw.setPosition(0);
-            } else if (gamepad1.left_trigger == 1) {
-                claw.setPosition(1);
+            if (gamepad1.right_trigger == 1) { //Open
+                //clawL.setDirection(Servo.Direction.REVERSE);
+                clawL.setPosition(0.425); //0.425
+                clawR.setPosition(0.6); //0.575
+            } else if (gamepad1.left_trigger == 1) { //Close
+                //clawL.setDirection(Servo.Direction.REVERSE);
+                clawL.setPosition(0.7);
+                clawR.setPosition(0.3);
             }
 
             //Slowmo mode, maybe switch to triggers later?
@@ -159,6 +165,7 @@ public class TeleOp1P extends LinearOpMode {
             //telemetry.addData("Arm Position", arm.getPosition);
             telemetry.addData("Desired Arm Position", desiredArmPos);
             //telemetry.addData("Claw", claw.getPosition);
+            telemetry.addData("ClawL Pos", clawL.getPosition());
 
             slideController.extendSlide();
             telemetry.update();

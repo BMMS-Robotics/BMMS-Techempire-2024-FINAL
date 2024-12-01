@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class LinearSlideController {
     public static int TARGET_POSITION_TICKS = 0; // Set at 0, modified in the teleop script
-    int POSITION_TOLERANCE = 10; //Highish tolerance because gravity
+    int POSITION_TOLERANCE = 5; //Highish tolerance because gravity
 
     private DcMotor slideMotor;
 

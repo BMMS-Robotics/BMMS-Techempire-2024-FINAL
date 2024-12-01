@@ -26,7 +26,9 @@ public class TeleOp2P extends LinearOpMode {
         extend.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         extend.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Servo arm = hardwareMap.get(Servo.class, "arm");
-        Servo claw = hardwareMap.get(Servo.class, "claw");
+        //Servo claw = hardwareMap.get(Servo.class, "claw");
+        Servo clawL = hardwareMap.get(Servo.class, "clawL");
+        Servo clawR = hardwareMap.get(Servo.class, "clawR");
 
 
         // Reverse the right side motors. This may be wrong for your setup.
@@ -39,7 +41,7 @@ public class TeleOp2P extends LinearOpMode {
         double slowMo = 2.5;
 
         //Fun software limits with kaitlyn
-        double maxArmPosition = 0.9;
+        double maxArmPosition = 0.85;
         double minArmPosition = 0.5;
         double armSpeed = 0.025;
 
@@ -93,10 +95,14 @@ public class TeleOp2P extends LinearOpMode {
             }
 
             //Get the claw
-            if (gamepad2.right_trigger == 1) {
-                claw.setPosition(1);
-            } else if (gamepad2.left_trigger == 1) {
-                claw.setPosition(0);
+            if (gamepad1.right_trigger == 1) { //Open
+                //clawL.setDirection(Servo.Direction.REVERSE);
+                clawL.setPosition(0.425); //0.425
+                clawR.setPosition(0.6); //0.575
+            } else if (gamepad1.left_trigger == 1) { //Close
+                //clawL.setDirection(Servo.Direction.REVERSE);
+                clawL.setPosition(0.7);
+                clawR.setPosition(0.3);
             }
 
             //Slowmo mode, maybe switch to triggers later?
