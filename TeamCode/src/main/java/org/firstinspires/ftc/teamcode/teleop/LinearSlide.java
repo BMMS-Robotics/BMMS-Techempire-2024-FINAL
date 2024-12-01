@@ -9,8 +9,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class LinearSlide {
     public static final int TICK_INCREMENT = 100;
     private static final int POSITION_TOLERANCE = 15; // Adjusted for smoother stops
-    private static final double MAX_POWER = 1.0;
-    private static final double MIN_POWER = 0.3; // Adjusted to avoid stalling
 
     private static final int MAX_EXTENDED_HEIGHT = 3850;
     private static final int MIN_EXTENDED_HEIGHT = 0;
@@ -43,7 +41,7 @@ public class LinearSlide {
         }
 
         // Calculate power needed to move smoothly toward the target
-        double calculatedPower = calculateSmoothPower(distanceToTarget);
+        double calculatedPower = 1;
 
         // Set the target position and ensure the motor is in position control mode
         linearSlideMotor.setTargetPosition(targetPositionInTicks);
@@ -53,17 +51,7 @@ public class LinearSlide {
         linearSlideMotor.setPower(calculatedPower);
     }
 
-    private double calculateSmoothPower(int distanceToTarget) {
-        // Calculate the distance ratio
-        double distanceRatio = (double) Math.abs(distanceToTarget) / MAX_EXTENDED_HEIGHT;
 
-        // Scale the ratio to the power range
-        double powerRange = MAX_POWER - MIN_POWER;
-        double scaledPower = distanceRatio * powerRange + MIN_POWER;
-
-        // Clamp the power to stay within allowed limits
-        return Math.max(MIN_POWER, Math.min(scaledPower, MAX_POWER));
-    }
 
     private void ensureRunToPositionMode() {
         if (linearSlideMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {

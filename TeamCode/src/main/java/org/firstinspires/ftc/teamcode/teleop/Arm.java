@@ -7,10 +7,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Arm {
 
-    double targetPosition = 1; // Should this equal the maxArmPosition instead of 1?
+    double targetPosition = 0.85; // Should this equal the maxArmPosition instead of 1?
 
     //Fun software limits with kaitlyn
-    double maxArmPosition = 0.9;
+    double maxArmPosition = 0.85;
     double minArmPosition = 0.5;
     double armPositionIncrement = 0.025;
 

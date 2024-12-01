@@ -27,7 +27,7 @@ public class RevDriverHub {
     }
 
     public boolean slowDownButtonPressed() {
-        boolean result = (gamePad1.x == true);
+        boolean result = (gamePad1.x);
 
         // debounce for 25ms to prevent button smashing effects
         safeSleep(25);
@@ -35,7 +35,7 @@ public class RevDriverHub {
     }
 
     public boolean speedUpButtonPressed() {
-        boolean result =  (gamePad1.b == true);
+        boolean result =  (gamePad1.b);
 
         // debounce for 25ms to prevent button smashing effects
         safeSleep(25);
