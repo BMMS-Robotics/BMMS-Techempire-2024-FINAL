@@ -51,7 +51,21 @@ public class Auto1 extends LinearOpMode {
 //            backLeftMotor.setPower(-0.5);
 //            frontRightMotor.setPower(-0.5);
 //            backRightMotor.setPower(-0.5);
+            /*
+            Forward
+            Slide up
+            forward (A tiny bit!)
+            Slide down
+            claw open
+            back (tiny bit)
+            slide fully down
+            move back
+            move right
+            done
+
+             */
             autoClass.Forward(1140, 0.5);
+
 
 
 

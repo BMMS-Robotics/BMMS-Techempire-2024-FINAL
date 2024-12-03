@@ -41,7 +41,7 @@ public class LinearSlide {
         }
 
         // Calculate power needed to move smoothly toward the target
-        double calculatedPower = 0.5;
+        double calculatedPower = 0.5; //Power somewhat slow to make slide smooth
 
         // Set the target position and ensure the motor is in position control mode
         linearSlideMotor.setTargetPosition(targetPositionInTicks);
