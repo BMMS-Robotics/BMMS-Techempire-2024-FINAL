@@ -57,12 +57,63 @@ public class AutoClass {
 
     public void Left(int time, double power) throws InterruptedException {
         frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(-power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
         backRightMotor.setPower(-power);
         Thread.sleep(time);
         frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(power);
+        Thread.sleep(10);
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    public void Right(int time, double power) throws InterruptedException {
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(power);
+        Thread.sleep(time);
+        frontLeftMotor.setPower(-power);
         backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(-power);
+        Thread.sleep(10);
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    public void TurnLeft(int time, double power) throws InterruptedException {
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        Thread.sleep(time);
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(-power);
+        Thread.sleep(10);
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    public void TurnRight(int time, double power) throws InterruptedException {
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(-power);
+        Thread.sleep(time);
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(-power);
         frontRightMotor.setPower(power);
         backRightMotor.setPower(power);
         Thread.sleep(10);
