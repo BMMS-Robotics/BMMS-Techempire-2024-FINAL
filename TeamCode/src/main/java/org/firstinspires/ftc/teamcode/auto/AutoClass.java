@@ -12,6 +12,9 @@ public class AutoClass {
     DcMotor frontRightMotor;
     DcMotor backRightMotor;
     DcMotor slideMotor;
+    Servo arm;
+    Servo ClawL;
+    Servo ClawR;
 
     public static int TARGET_POSITION_TICKS = 0; // -UNUSED-
     int POSITION_TOLERANCE = 10;
@@ -24,6 +27,10 @@ public class AutoClass {
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         slideMotor = hardwareMap.dcMotor.get("linearSlide");
+        arm = hardwareMap.servo.get("arm");
+        ClawL = hardwareMap.servo.get("ClawL");
+        ClawR = hardwareMap.servo.get("ClawR");
+
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -148,7 +155,7 @@ public class AutoClass {
         //slideMotor.setPower(0);
     }
 
-    public void extendSlide(int targetPos) { //Keep in mind this is called every tick! (Or so)
+    public void extendSlide(int targetPos) { //The actually useful linear slide part. Call this and passthrough the target position ticks.
         //set target position and move to it i guess
         slideMotor.setTargetPosition(targetPos);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -186,5 +193,24 @@ public class AutoClass {
         if (slideMotor.getCurrentPosition() < 0) {
             slideMotor.setPower(0);
         }
+    }
+
+    public void CloseClaw() {
+        ClawL.setPosition(0.425);
+        ClawR.setPosition(0.6);
+    }
+    public void OpenClaw() {
+        ClawL.setPosition(0.7);
+        ClawR.setPosition(0.3);
+    }
+    public void Arm(double pos) {
+        //Just a precaution...
+        if (pos > 0.85) {
+            pos = 0.85; //Oh no you don't
+        }
+        if (pos < 0.5) {
+            pos = 0.5;
+        }
+        arm.setPosition(pos);
     }
 }
