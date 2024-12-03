@@ -1,15 +1,14 @@
 package org.firstinspires.ftc.teamcode.auto;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
-public class ParkingMiddle extends LinearOpMode {
+public class Auto1 extends LinearOpMode {
 //    DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
 //    DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
 //    DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
@@ -28,10 +27,7 @@ public class ParkingMiddle extends LinearOpMode {
 
         // // Declare our motors
         // // Make sure your ID's match your configuration
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        AutoClass autoClass = new AutoClass();
         DcMotor extend = hardwareMap.dcMotor.get("linearSlide");
         Servo arm = hardwareMap.get(Servo.class, "arm");
         //Servo claw = hardwareMap.get(Servo.class, "claw");
@@ -40,8 +36,7 @@ public class ParkingMiddle extends LinearOpMode {
         // If your robot moves backwards when commanded to go forwards,
         // reverse the left side instead.
         // See the note about this earlier on this page.
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         waitForStart();
 
@@ -49,19 +44,16 @@ public class ParkingMiddle extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-
+            autoClass.MotorInit(hardwareMap);
             //Move robot sideways
             //720ms * 4 ft (2 tiles sideways) = 2280ms to end up 2 tiles to the left
-            frontLeftMotor.setPower(-0.5);
-            backLeftMotor.setPower(0.5);
-            frontRightMotor.setPower(0.5);
-            backRightMotor.setPower(-0.5);
-            sleep(1750);
-            frontLeftMotor.setPower(0.5);
-            backLeftMotor.setPower(-0.5);
-            frontRightMotor.setPower(-0.5);
-            backRightMotor.setPower(0.5);
-            sleep(10);
+//            frontLeftMotor.setPower(-0.5);
+//            backLeftMotor.setPower(-0.5);
+//            frontRightMotor.setPower(-0.5);
+//            backRightMotor.setPower(-0.5);
+            autoClass.Forward(1140, 0.5);
+
+
 
 
             break;
@@ -70,6 +62,7 @@ public class ParkingMiddle extends LinearOpMode {
         }
     }
 
+    
 
 
 
