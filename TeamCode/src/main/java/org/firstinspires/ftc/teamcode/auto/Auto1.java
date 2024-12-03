@@ -28,7 +28,7 @@ public class Auto1 extends LinearOpMode {
         // // Declare our motors
         // // Make sure your ID's match your configuration
         AutoClass autoClass = new AutoClass();
-        DcMotor extend = hardwareMap.dcMotor.get("linearSlide");
+
         Servo arm = hardwareMap.get(Servo.class, "arm");
         //Servo claw = hardwareMap.get(Servo.class, "claw");
 
