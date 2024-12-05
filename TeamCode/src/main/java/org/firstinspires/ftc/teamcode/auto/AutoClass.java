@@ -28,22 +28,97 @@ public class AutoClass {
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         slideMotor = hardwareMap.dcMotor.get("linearSlide");
         arm = hardwareMap.servo.get("arm");
-        ClawL = hardwareMap.servo.get("ClawL");
-        ClawR = hardwareMap.servo.get("ClawR");
+        ClawL = hardwareMap.servo.get("clawL");
+        ClawR = hardwareMap.servo.get("clawR");
 
 
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
-
-    public void Forward(int time, double power) throws InterruptedException {
+    //1 ft per 360 ms
+    //Math is ft * 360 / power (get the distance, times 360 for milliseconds, divide by power (which will be 0-1) to get the time
+    public void Forward(int time, double power) throws InterruptedException {;
+        //Set to power, move in direction
         frontLeftMotor.setPower(power);
         backLeftMotor.setPower(power);
         frontRightMotor.setPower(power);
         backRightMotor.setPower(power);
+        //Fancy math
+        //Converts feet to milliseconds, divides by power (so if power is 0.5 then it's x2), floors to remove decimals and converts to an int.
+        //Thread.sleep((int) Math.floor(dist * 360 / power));
         Thread.sleep(time);
+        //Sets power to opposite for 10ms to counteract drift
+        frontLeftMotor.setPower(-1);
+        backLeftMotor.setPower(-1);
+        frontRightMotor.setPower(-1);
+        backRightMotor.setPower(-1);
+        Thread.sleep(25);
+        //Stops motors.
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    public void Backward(int dist, double power) throws InterruptedException {
         frontLeftMotor.setPower(-power);
         backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(-power);
+        Thread.sleep((int) Math.floor(dist * 360 / power));
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        Thread.sleep(10);
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    public void Left(int dist, double power) throws InterruptedException {
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(-power);
+        Thread.sleep((int) Math.floor(dist * 360 / power));
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(power);
+        Thread.sleep(10);
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    public void Right(int dist, double power) throws InterruptedException {
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(power);
+        Thread.sleep((int) Math.floor(dist * 360 / power));
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(-power);
+        Thread.sleep(10);
+        frontLeftMotor.setPower(0);
+        backLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+    }
+
+    public void TurnLeft(int dist, double power) throws InterruptedException {
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        Thread.sleep((int) Math.floor(dist * 360 / power));
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
         frontRightMotor.setPower(-power);
         backRightMotor.setPower(-power);
         Thread.sleep(10);
@@ -53,80 +128,12 @@ public class AutoClass {
         backRightMotor.setPower(0);
     }
 
-    public void Backward(int time, double power) throws InterruptedException {
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(-power);
-        Thread.sleep(time);
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        Thread.sleep(10);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-    }
-
-    public void Left(int time, double power) throws InterruptedException {
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(-power);
-        Thread.sleep(time);
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(power);
-        Thread.sleep(10);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-    }
-
-    public void Right(int time, double power) throws InterruptedException {
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(power);
-        Thread.sleep(time);
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(-power);
-        Thread.sleep(10);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-    }
-
-    public void TurnLeft(int time, double power) throws InterruptedException {
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        Thread.sleep(time);
+    public void TurnRight(int dist, double power) throws InterruptedException {
         frontLeftMotor.setPower(power);
         backLeftMotor.setPower(power);
         frontRightMotor.setPower(-power);
         backRightMotor.setPower(-power);
-        Thread.sleep(10);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-    }
-
-    public void TurnRight(int time, double power) throws InterruptedException {
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(-power);
-        Thread.sleep(time);
+        Thread.sleep((int) Math.floor(dist * 360 / power));
         frontLeftMotor.setPower(-power);
         backLeftMotor.setPower(-power);
         frontRightMotor.setPower(power);

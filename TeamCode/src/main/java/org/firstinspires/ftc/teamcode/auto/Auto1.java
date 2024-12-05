@@ -45,6 +45,7 @@ public class Auto1 extends LinearOpMode {
         while (opModeIsActive()) {
 
             autoClass.MotorInit(hardwareMap);
+
             //Move robot sideways
             //720ms * 4 ft (2 tiles sideways) = 2280ms to end up 2 tiles to the left
 //            frontLeftMotor.setPower(-0.5);
@@ -64,7 +65,12 @@ public class Auto1 extends LinearOpMode {
             done
 
              */
-            autoClass.Forward(1140, 0.5);
+
+            //335 per foot???????????????
+
+            //IMPORTANT: Movement functions pass in Distance (In feet) and power of the motor! DO NOT SET THE POWER TO 0.
+            //If you set the power to 0, the universe as we know it will end.
+            autoClass.Forward(750, 0.5);
 
 
 
