@@ -8,14 +8,14 @@ public class Tiffany {
     // Use classes for each of the parts of the bot that move independently
     DriveTrain driveTrain;
     Claw claw;
-    LinearSlide linearSlide;
+    LinearEncoderSlide linearSlide;
     Arm arm;
 
     public Tiffany(HardwareMap hardwareMap) {
         // Create classes for each of the parts of the bot that move independently
         driveTrain = new DriveTrain(hardwareMap);
         claw = new Claw(hardwareMap);
-        linearSlide = new LinearSlide(hardwareMap);
+        linearSlide = new LinearEncoderSlide(hardwareMap);
         arm = new Arm(hardwareMap);
     }
 
@@ -45,8 +45,9 @@ public class Tiffany {
             linearSlide.slideUp();
         } else if (driverHub.isSlideDownButtonPressed()) {
             linearSlide.slideDown();
+        } else {
+            linearSlide.stopMotor();
         }
-        linearSlide.adjustSlide();
 
         // ADJUST Arm up or down per revDriverHub input
         if (driverHub.isArmUpButtonPressed()) {
