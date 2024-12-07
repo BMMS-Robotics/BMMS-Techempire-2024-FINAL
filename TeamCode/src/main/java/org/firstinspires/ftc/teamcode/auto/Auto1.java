@@ -66,11 +66,58 @@ public class Auto1 extends LinearOpMode {
 
              */
 
-            //335 per foot???????????????
+            //335 per foot?
+
+            //375 per foot??
 
             //IMPORTANT: Movement functions pass in Distance (In feet) and power of the motor! DO NOT SET THE POWER TO 0.
             //If you set the power to 0, the universe as we know it will end.
-            autoClass.Forward(750, 0.5);
+            //autoClass.Forward(375, 0.5);
+            //autoClass.Forward(750, 0.5);
+            autoClass.ForwardDist(2.25, 0.5);
+            telemetry.addData("Forward", null);
+            telemetry.update();
+            autoClass.Arm(0.85);
+            telemetry.addData("Arm Up", null);
+            telemetry.update();
+            Thread.sleep(500);
+            autoClass.extendSlide(2700);
+            telemetry.addData("Slide Up", null);
+            telemetry.update();
+            Thread.sleep(2000);
+            autoClass.ForwardDist(0.25, 0.1);
+            telemetry.addData("Forward", null);
+            telemetry.update();
+            autoClass.CloseClaw();
+            telemetry.addData("Close Claw", null);
+            telemetry.update();
+            autoClass.extendSlide(2000);
+            telemetry.addData("Lower Slide", null);
+            telemetry.update();
+            Integer i = 0;
+            while (i < 1000) {
+                autoClass.CloseClaw();
+                telemetry.addData(i.toString(), null);
+                telemetry.update();
+                Thread.sleep(10);
+
+                i += 10;
+            }
+            Thread.sleep(400);
+            autoClass.OpenClaw();
+            Thread.sleep(100);
+            autoClass.extendSlide(11);
+            Thread.sleep(750);
+            autoClass.extendSlide(0);
+            autoClass.Backward(2.25, 0.5);
+            autoClass.Right(4, 0.5);
+
+
+
+
+            //autoClass.ForwardDist(0.25, 0.25);
+
+
 
 
 
