@@ -102,4 +102,12 @@ public class RevDriverHub {
             return gamePad2.a;
         }
     }
+
+    public boolean isNavigateToClosestAprilTagButtonPressed() {
+        if (playerMode == PlayerMode.SINGLE_PLAYER) {
+            return gamePad1.dpad_left;
+        } else {
+            return gamePad2.dpad_left;
+        }
+    }
 }
