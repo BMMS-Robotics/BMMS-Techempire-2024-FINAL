@@ -20,6 +20,7 @@ public class SightNav {
                 hardwareMap.get(WebcamName.class, "Webcam 1"),
                 aprilTagProcessor
         );
+
     }
     public void navigateToClosestTag(DriveTrain driveTrain, Telemetry telemetry) {
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
@@ -50,9 +51,10 @@ public class SightNav {
             double rotation = closestTag.ftcPose.yaw * 0.1;
 
             // Drive toward the tag
-            driveTrain.drive(driveX, driveY, rotation);
+            driveTrain.drive(driveX * 0.5, -driveY * 0.5, -rotation * 0.5);
         } else {
             telemetry.addData("Status", "No tags detected");
+            //driveTrain.drive(0, 0, 0); //Stop if it gets so close it can't see the apriltag
             telemetry.update();
         }
     }
