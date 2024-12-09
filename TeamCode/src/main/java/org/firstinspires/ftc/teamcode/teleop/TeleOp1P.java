@@ -4,11 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
 public class TeleOp1P extends TeleOpBase {
-    // Change mode to Single Player
-    @Override
-    protected PlayerMode getPlayerMode() {
-        return PlayerMode.SINGLE_PLAYER;
+    public TeleOp1P() {
+        super(PlayerMode.SINGLE_PLAYER);
     }
-
-    // everything else done by TeleOpBase
 }
