@@ -6,6 +6,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.firstinspires.ftc.vision.VisionPortal;
+
+import java.util.List;
+
+
 public class AutoClass {
     DcMotor frontLeftMotor;
     DcMotor backLeftMotor;
@@ -15,13 +26,15 @@ public class AutoClass {
     Servo arm;
     Servo ClawL;
     Servo ClawR;
+    private VisionPortal visionPortal;
+    private AprilTagProcessor aprilTagProcessor;
 
     public static int TARGET_POSITION_TICKS = 0; // -UNUSED-
     int POSITION_TOLERANCE = 10;
 
     int MAX_EXTEND_HEIGHT = 3850;
 
-    public void MotorInit(HardwareMap hardwareMap) {
+    public void Init(HardwareMap hardwareMap) {
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
@@ -44,8 +57,14 @@ public class AutoClass {
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-
+        // Initialize AprilTag processing
+        aprilTagProcessor = new AprilTagProcessor.Builder().build();
+        visionPortal = VisionPortal.easyCreateWithDefaults(
+                hardwareMap.get(WebcamName.class, "Webcam 1"),
+                aprilTagProcessor
+        );
     }
+
     //1 ft per 360 ms
     //Math is ft * 360 / power (get the distance, times 360 for milliseconds, divide by power (which will be 0-1) to get the time
     public void Forward(int time, double power) throws InterruptedException {;
@@ -231,5 +250,23 @@ public class AutoClass {
             pos = 0.5;
         }
         arm.setPosition(pos);
+    }
+    public void RightUntilAprilTag() {
+        List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
+        frontLeftMotor.setPower(0.5);
+        backLeftMotor.setPower(-0.5);
+        frontRightMotor.setPower(-0.5);
+        backRightMotor.setPower(0.5);
+
+        while (42 == 42) {
+            if (!detections.isEmpty()) {
+                frontLeftMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
+                backRightMotor.setPower(0);
+                break;
+            }
+        }
+
     }
 }

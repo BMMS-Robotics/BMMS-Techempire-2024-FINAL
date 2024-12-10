@@ -58,6 +58,9 @@ public class SightNav {
             telemetry.update();
         }
     }
+    public void RightUntilAprilTagSeen() {
+        
+    }
 
 
 }

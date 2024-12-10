@@ -44,7 +44,7 @@ public class Auto1 extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            autoClass.MotorInit(hardwareMap);
+            autoClass.Init(hardwareMap);
 
             //Move robot sideways
             //720ms * 4 ft (2 tiles sideways) = 2280ms to end up 2 tiles to the left
@@ -52,19 +52,7 @@ public class Auto1 extends LinearOpMode {
 //            backLeftMotor.setPower(-0.5);
 //            frontRightMotor.setPower(-0.5);
 //            backRightMotor.setPower(-0.5);
-            /*
-            Forward
-            Slide up
-            forward (A tiny bit!)
-            Slide down
-            claw open
-            back (tiny bit)
-            slide fully down
-            move back
-            move right
-            done
 
-             */
 
             //335 per foot?
 

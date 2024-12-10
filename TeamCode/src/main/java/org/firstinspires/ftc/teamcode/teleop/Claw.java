@@ -15,8 +15,8 @@ public class Claw {
     }
 
     public void open() {
-        clawL.setPosition(0.425); // i don't know if 1 is open or close (part of why it's helpful to encapsulate logic in classes using methods that are self describing)
-        clawR.setPosition(0.6);
+        clawL.setPosition(0.4); // i don't know if 1 is open or close (part of why it's helpful to encapsulate logic in classes using methods that are self describing)
+        clawR.setPosition(0.625);
     }
 
     public void close() {
