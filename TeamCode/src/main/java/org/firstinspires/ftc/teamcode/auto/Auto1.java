@@ -62,28 +62,23 @@ public class Auto1 extends LinearOpMode {
             //If you set the power to 0, the universe as we know it will end.
             //autoClass.Forward(375, 0.5);
             //autoClass.Forward(750, 0.5);
-            autoClass.ForwardDist(2.25, 0.5);
-            telemetry.addData("Forward", null);
-            telemetry.update();
-            autoClass.Arm(0.85);
-            telemetry.addData("Arm Up", null);
-            telemetry.update();
-            Thread.sleep(500);
-            autoClass.extendSlide(2700);
-            telemetry.addData("Slide Up", null);
-            telemetry.update();
-            Thread.sleep(2000);
-            autoClass.ForwardDist(0.25, 0.1);
-            telemetry.addData("Forward", null);
-            telemetry.update();
-            autoClass.CloseClaw();
-            telemetry.addData("Close Claw", null);
-            telemetry.update();
-            autoClass.extendSlide(2000);
-            telemetry.addData("Lower Slide", null);
-            telemetry.update();
+            autoClass.ForwardDist(2.25, 0.5); //Move forward
+
+            autoClass.Arm(0.85); //Arm goes up to combat the energy transfer from moving
+            Thread.sleep(500); //Sleep to allow arm to move
+
+            autoClass.extendSlide(2700); //Linear slide goes up high enough to place specimen
+
+            Thread.sleep(2000); //Wait for linear slide
+
+            autoClass.ForwardDist(0.25, 0.1); //Forward slightly to properly align specimen
+
+            autoClass.CloseClaw(); // Adjust grip on the claw
+
+            autoClass.extendSlide(2000); //Move slide back down
+
             Integer i = 0;
-            while (i < 1000) {
+            while (i < 1000) { //Overcomplicated code to force claw closed
                 autoClass.CloseClaw();
                 telemetry.addData(i.toString(), null);
                 telemetry.update();
@@ -91,14 +86,19 @@ public class Auto1 extends LinearOpMode {
 
                 i += 10;
             }
-            Thread.sleep(400);
-            autoClass.OpenClaw();
-            Thread.sleep(100);
-            autoClass.extendSlide(11);
-            Thread.sleep(750);
-            autoClass.extendSlide(0);
-            autoClass.Backward(2.25, 0.5);
-            autoClass.Right(4, 0.5);
+            Thread.sleep(400); //More time for linear slide
+            autoClass.OpenClaw(); //Release specimen
+            Thread.sleep(100); //Time for claw to open
+
+            autoClass.extendSlide(11); //Set the linear slide to 0
+            Thread.sleep(750); //Time for slide to go down
+            autoClass.extendSlide(0); //Still having it going down just ignore this part
+
+            autoClass.Backward(2.25, 0.5); //Move backwards (obviously)
+
+            autoClass.Right(4, 0.5); //Move right to park
+
+            //Wow much productivity
 
 
 

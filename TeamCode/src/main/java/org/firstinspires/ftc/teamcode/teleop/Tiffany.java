@@ -10,6 +10,15 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.List;
 
+/*
+       ___________    _______     ________   ________   _____         ___    __    __    __
+      /____  ____/   /__  __/    / ______/  / ______/  / __ |        /   |  / /    \ \  / /
+          / /          / /      / /___     / /___     / /_| |       / /| | / /      \ \/ /
+         / /          / /      / ____/    / ____/    / ___  |      / / | |/ /        \  /
+        / /        __/ /__    / /        / /        / /   | |     / /  |   /         / /
+       /_/        /______/   /_/        /_/        /_/    |_|    /_/   |__/         /_/
+ Totally Intelligent, Fully Functioning, Awesome, Neat, Yawing Robot
+ */
 public class Tiffany {
     // Use classes for each of the parts of the bot that move independently
     DriveTrain driveTrain;
