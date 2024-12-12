@@ -29,7 +29,7 @@ public class Auto1 extends LinearOpMode {
         // // Make sure your ID's match your configuration
         AutoClass autoClass = new AutoClass();
 
-        Servo arm = hardwareMap.get(Servo.class, "arm");
+        //Servo arm = hardwareMap.get(Servo.class, "arm");
         //Servo claw = hardwareMap.get(Servo.class, "claw");
 
         // Reverse the right side motors. This may be wrong for your setup.
