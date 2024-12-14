@@ -60,9 +60,8 @@ public class Auto1 extends LinearOpMode {
 
             //IMPORTANT: Movement functions pass in Distance (In feet) and power of the motor! DO NOT SET THE POWER TO 0.
             //If you set the power to 0, the universe as we know it will end.
-            //autoClass.Forward(375, 0.5);
-            //autoClass.Forward(750, 0.5);
-            autoClass.ForwardDist(2.25, 0.5); //Move forward
+            autoClass.Forward(1000, 0.5f);
+
 
             autoClass.Arm(0.85); //Arm goes up to combat the energy transfer from moving
             Thread.sleep(500); //Sleep to allow arm to move
@@ -71,11 +70,11 @@ public class Auto1 extends LinearOpMode {
 
             Thread.sleep(2000); //Wait for linear slide
 
-            autoClass.ForwardDist(0.25, 0.1); //Forward slightly to properly align specimen
+            autoClass.Forward(200, 0.1f); //Forward slightly to properly align specimen
 
             autoClass.CloseClaw(); // Adjust grip on the claw
 
-            autoClass.extendSlide(2000); //Move slide back down
+            autoClass.extendSlide(1750); //Move slide back down
 
             Integer i = 0;
             while (i < 1000) { //Overcomplicated code to force claw closed
@@ -94,11 +93,12 @@ public class Auto1 extends LinearOpMode {
             Thread.sleep(750); //Time for slide to go down
             autoClass.extendSlide(0); //Still having it going down just ignore this part
 
-            autoClass.Backward(2.25, 0.5); //Move backwards (obviously)
+            autoClass.Backward(1000, 0.5f); //Move backwards (obviously)
 
-            autoClass.Right(4, 0.5); //Move right to park
+            autoClass.Right(2000, 0.5f); //Move right to park
 
             //Wow much productivity
+            Thread.sleep(1000);
 
 
 

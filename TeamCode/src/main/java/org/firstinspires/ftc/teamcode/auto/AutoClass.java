@@ -35,10 +35,12 @@ public class AutoClass {
     int MAX_EXTEND_HEIGHT = 3850;
 
     public void Init(HardwareMap hardwareMap) {
+
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+
         slideMotor = hardwareMap.dcMotor.get("linearSlide");
         arm = hardwareMap.servo.get("arm");
         ClawL = hardwareMap.servo.get("clawL");
@@ -57,6 +59,19 @@ public class AutoClass {
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+
         // Initialize AprilTag processing
         aprilTagProcessor = new AprilTagProcessor.Builder().build();
         visionPortal = VisionPortal.easyCreateWithDefaults(
@@ -66,115 +81,175 @@ public class AutoClass {
     }
 
     //1 ft per 360 ms
+
+    public void EncoderTest(int ticks, float power) throws InterruptedException {
+        frontLeftMotor.setTargetPosition(ticks);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setTargetPosition(ticks);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setTargetPosition(ticks);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setTargetPosition(ticks);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        while (frontLeftMotor.getCurrentPosition() < ticks) {
+            //Wait
+        }
+
+//
+    }
+    public void Forward(int ticks, float power) throws InterruptedException {
+        //region MotorInit
+
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setTargetPosition(ticks);
+        backLeftMotor.setTargetPosition(ticks);
+        frontRightMotor.setTargetPosition(ticks);
+        backRightMotor.setTargetPosition(ticks);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //endregion
+
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        while (frontLeftMotor.getCurrentPosition() < ticks) {
+            //Wait
+        }
+    }
+    public void Backward(int ticks, float power) throws InterruptedException {
+
+        //region MotorInit
+
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeftMotor.setTargetPosition(-ticks);
+        backLeftMotor.setTargetPosition(-ticks);
+        frontRightMotor.setTargetPosition(-ticks);
+        backRightMotor.setTargetPosition(-ticks);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //endregion
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(-power);
+        while (frontLeftMotor.getCurrentPosition() > -ticks) {
+            //Wait
+        }
+    }
+
+    public void Left(int ticks, float power) throws InterruptedException {
+        //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeftMotor.setTargetPosition(-ticks);
+        backLeftMotor.setTargetPosition(ticks);
+        frontRightMotor.setTargetPosition(ticks);
+        backRightMotor.setTargetPosition(-ticks);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //endregion
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(-power);
+        while (frontLeftMotor.getCurrentPosition() > -ticks) {
+            //Wait
+        }
+    }
+
+    public void Right(int ticks, float power) throws InterruptedException {
+        //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeftMotor.setTargetPosition(ticks);
+        backLeftMotor.setTargetPosition(-ticks);
+        frontRightMotor.setTargetPosition(-ticks);
+        backRightMotor.setTargetPosition(ticks);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //endregion
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(power);
+        while (frontLeftMotor.getCurrentPosition() < ticks) {
+            //Wait
+        }
+    }
+    public void TurnLeft(int ticks, float power) throws InterruptedException {
+        //region MotorInit
+        frontLeftMotor.setTargetPosition(-ticks);
+        backLeftMotor.setTargetPosition(-ticks);
+        frontRightMotor.setTargetPosition(ticks);
+        backRightMotor.setTargetPosition(ticks);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //endregion
+        frontLeftMotor.setPower(-power);
+        backLeftMotor.setPower(-power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        while (frontLeftMotor.getCurrentPosition() > -ticks) {
+            //Wait
+        }
+    }
+
+    public void TurnRight(int ticks, float power) throws InterruptedException {
+        //region MotorInit
+        frontLeftMotor.setTargetPosition(ticks);
+        backLeftMotor.setTargetPosition(ticks);
+        frontRightMotor.setTargetPosition(-ticks);
+        backRightMotor.setTargetPosition(-ticks);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //endregion
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(-power);
+        backRightMotor.setPower(-power);
+        while (frontLeftMotor.getCurrentPosition() < ticks) {
+            //Wait
+        }
+    }
     //Math is ft * 360 / power (get the distance, times 360 for milliseconds, divide by power (which will be 0-1) to get the time
-    public void Forward(int time, double power) throws InterruptedException {;
-        //Set to power, move in direction
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        //Fancy math
-        //Converts feet to milliseconds, divides by power (so if power is 0.5 then it's x2), floors to remove decimals and converts to an int.
-        //Thread.sleep((int) Math.floor(dist * 375 / power));
-        Thread.sleep(time);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        Thread.sleep(1000); //Give time for the motor to brake.
-    }
-    public void ForwardDist(double dist, double power) throws InterruptedException {;
-        //Set to power, move in direction
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        //Fancy math
-        //Converts feet to milliseconds, divides by power (so if power is 0.5 then it's x2), floors to remove decimals and converts to an int.
-//        Thread.sleep((int) Math.floor(dist * 375 / power));
-        Thread.sleep((int) Math.floor(dist * 187.5 / power));
-        //Thread.sleep(time);
-        //Sets power to opposite for 10ms to counteract drift
-        //Stops motors.
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        Thread.sleep(500); //Time for the motor to brake.
-    }
 
-    public void Backward(double dist, double power) throws InterruptedException {
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(-power);
-        Thread.sleep((int) Math.floor(dist * 187.5 / power));
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        Thread.sleep(500);
-    }
 
-    public void Left(int dist, double power) throws InterruptedException {
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(-power);
-        Thread.sleep((int) Math.floor(dist * 187.5 / power));
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        Thread.sleep(500);
-    }
 
-    public void Right(int dist, double power) throws InterruptedException {
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(power);
-        Thread.sleep((int) Math.floor(dist * 187.5 / power));
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        Thread.sleep(500);
-    }
-
-    public void TurnLeft(int dist, double power) throws InterruptedException {
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        Thread.sleep((int) Math.floor(dist * 360 / power)); //Do math for radians later
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(-power);
-        Thread.sleep(10);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-    }
-
-    public void TurnRight(int dist, double power) throws InterruptedException {
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(-power);
-        backRightMotor.setPower(-power);
-        Thread.sleep((int) Math.floor(dist * 360 / power));
-        frontLeftMotor.setPower(-power);
-        backLeftMotor.setPower(-power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        Thread.sleep(10);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-    }
     public void LinearSlideController(DcMotor motor) {
         //Magical initialization stuff
         this.slideMotor = motor;
@@ -234,8 +309,8 @@ public class AutoClass {
     }
 
     public void CloseClaw() {
-        ClawL.setPosition(0.425);
-        ClawR.setPosition(0.6);
+        ClawL.setPosition(0.4125);
+        ClawR.setPosition(0.6125);
     }
     public void OpenClaw() {
         ClawL.setPosition(0.7);
