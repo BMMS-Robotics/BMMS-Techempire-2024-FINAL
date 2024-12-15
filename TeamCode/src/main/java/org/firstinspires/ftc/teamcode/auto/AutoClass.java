@@ -103,6 +103,10 @@ public class AutoClass {
     }
     public void Forward(int ticks, float power) throws InterruptedException {
         //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -129,6 +133,10 @@ public class AutoClass {
     public void Backward(int ticks, float power) throws InterruptedException {
 
         //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -156,6 +164,11 @@ public class AutoClass {
 
     public void Left(int ticks, float power) throws InterruptedException {
         //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -182,6 +195,11 @@ public class AutoClass {
 
     public void Right(int ticks, float power) throws InterruptedException {
         //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -207,10 +225,15 @@ public class AutoClass {
     }
     public void TurnLeft(int ticks, float power) throws InterruptedException {
         //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeftMotor.setTargetPosition(-ticks);
         backLeftMotor.setTargetPosition(-ticks);
         frontRightMotor.setTargetPosition(ticks);
         backRightMotor.setTargetPosition(ticks);
+
 
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -228,6 +251,10 @@ public class AutoClass {
 
     public void TurnRight(int ticks, float power) throws InterruptedException {
         //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeftMotor.setTargetPosition(ticks);
         backLeftMotor.setTargetPosition(ticks);
         frontRightMotor.setTargetPosition(-ticks);
@@ -326,19 +353,29 @@ public class AutoClass {
         }
         arm.setPosition(pos);
     }
-    public void RightUntilAprilTag() {
+    public void RightUntilAprilTag() throws InterruptedException {
+//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setTargetPosition(10000);
+        backLeftMotor.setTargetPosition(-10000);
+        frontRightMotor.setTargetPosition(-10000);
+        backRightMotor.setTargetPosition(10000);
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
         frontLeftMotor.setPower(0.5);
         backLeftMotor.setPower(-0.5);
         frontRightMotor.setPower(-0.5);
         backRightMotor.setPower(0.5);
 
-        while (42 == 42) {
+        while (true) {
+            detections = aprilTagProcessor.getDetections();
             if (!detections.isEmpty()) {
                 frontLeftMotor.setPower(0);
                 backLeftMotor.setPower(0);
                 frontRightMotor.setPower(0);
                 backRightMotor.setPower(0);
+                Thread.sleep(1000);
                 break;
             }
         }

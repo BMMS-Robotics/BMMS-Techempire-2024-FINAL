@@ -49,7 +49,15 @@ public class ParkingMiddle extends LinearOpMode {
 
         while (opModeIsActive()) {
 
+            /*
+            tic tac toe anyone?
 
+            000
+            0x0
+            000
+
+
+             */
             //Move robot sideways
             //720ms * 4 ft (2 tiles sideways) = 2280ms to end up 2 tiles to the left
             frontLeftMotor.setPower(-0.5);
