@@ -29,13 +29,7 @@ public class Auto1 extends LinearOpMode {
         // // Make sure your ID's match your configuration
         AutoClass autoClass = new AutoClass();
 
-        //Servo arm = hardwareMap.get(Servo.class, "arm");
-        //Servo claw = hardwareMap.get(Servo.class, "claw");
-
-        // Reverse the right side motors. This may be wrong for your setup.
-        // If your robot moves backwards when commanded to go forwards,
-        // reverse the left side instead.
-        // See the note about this earlier on this page.
+        //Autonomous code, no usage of vision. Starts with 1 (one) preloaded specimen directly at the center of the wall.
 
 
         waitForStart();
@@ -46,20 +40,7 @@ public class Auto1 extends LinearOpMode {
 
             autoClass.Init(hardwareMap);
 
-            //Move robot sideways
-            //720ms * 4 ft (2 tiles sideways) = 2280ms to end up 2 tiles to the left
-//            frontLeftMotor.setPower(-0.5);
-//            backLeftMotor.setPower(-0.5);
-//            frontRightMotor.setPower(-0.5);
-//            backRightMotor.setPower(-0.5);
 
-
-            //335 per foot?
-
-            //375 per foot??
-
-            //IMPORTANT: Movement functions pass in Distance (In feet) and power of the motor! DO NOT SET THE POWER TO 0.
-            //If you set the power to 0, the universe as we know it will end.
             autoClass.Forward(1000, 0.5f);
 
 

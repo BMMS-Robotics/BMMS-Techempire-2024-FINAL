@@ -130,6 +130,7 @@ public class AutoClass {
             //Wait
         }
     }
+
     public void Backward(int ticks, float power) throws InterruptedException {
 
         //region MotorInit
@@ -223,6 +224,7 @@ public class AutoClass {
             //Wait
         }
     }
+
     public void TurnLeft(int ticks, float power) throws InterruptedException {
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -273,8 +275,6 @@ public class AutoClass {
             //Wait
         }
     }
-    //Math is ft * 360 / power (get the distance, times 360 for milliseconds, divide by power (which will be 0-1) to get the time
-
 
 
     public void LinearSlideController(DcMotor motor) {
@@ -295,22 +295,12 @@ public class AutoClass {
         //slideMotor.setPower(0);
     }
 
-    public void extendSlide(int targetPos) { //The actually useful linear slide part. Call this and passthrough the target position ticks.
+    public void extendSlide(int targetPos) {
         //set target position and move to it i guess
         slideMotor.setTargetPosition(targetPos);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        /*
-        if (slideMotor.getCurrentPosition() != MAX_EXTEND_HEIGHT && slideMotor.getPower() == 0) { //only apply the power if it's actually needed to prevent jolting the motor
-            slideMotor.setPower(1); // Full power to reach target
-        }
-        //Maybe use abs value for better tolerance both up and down
-        if (slideMotor.getCurrentPosition() <= POSITION_TOLERANCE && TARGET_POSITION_TICKS <= POSITION_TOLERANCE && slideMotor.getPower() != 1) { //Check if we're at/less than 0 and we want to be at 0. If so, turn off motor to reduce strain.
-            slideMotor.setPower(0);
-        }
-        */
+
         if (slideMotor.getCurrentPosition() != MAX_EXTEND_HEIGHT && targetPos >= POSITION_TOLERANCE && slideMotor.getPower() == 0) {
-            //  Ensure the motor is not out of its limit             If the target is lower than the position,          If the power's already on,
-            //  just in case                                         set the power to 0 to prevent unneeded strain      why turn it on again?
             slideMotor.setPower(1);
         }
         if (targetPos <= POSITION_TOLERANCE && slideMotor.getPower() != 0) {
@@ -343,6 +333,7 @@ public class AutoClass {
         ClawL.setPosition(0.7);
         ClawR.setPosition(0.3);
     }
+
     public void Arm(double pos) {
         //Just a precaution...
         if (pos > 0.85) {
@@ -353,20 +344,49 @@ public class AutoClass {
         }
         arm.setPosition(pos);
     }
+
     public void RightUntilAprilTag() throws InterruptedException {
-//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontLeftMotor.setTargetPosition(10000);
-        backLeftMotor.setTargetPosition(-10000);
-        frontRightMotor.setTargetPosition(-10000);
-        backRightMotor.setTargetPosition(10000);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontLeftMotor.setTargetPosition(10000);
+//        backLeftMotor.setTargetPosition(-10000);
+//        frontRightMotor.setTargetPosition(-10000);
+//        backRightMotor.setTargetPosition(10000);
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
         frontLeftMotor.setPower(0.5);
         backLeftMotor.setPower(-0.5);
         frontRightMotor.setPower(-0.5);
         backRightMotor.setPower(0.5);
+
+        while (true) {
+            detections = aprilTagProcessor.getDetections();
+            if (!detections.isEmpty()) {
+                frontLeftMotor.setPower(0);
+                backLeftMotor.setPower(0);
+                frontRightMotor.setPower(0);
+                backRightMotor.setPower(0);
+                Thread.sleep(1000);
+                break;
+            }
+        }
+
+    }
+    public void LeftUntilAprilTag() throws InterruptedException {
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontLeftMotor.setTargetPosition(10000);
+//        backLeftMotor.setTargetPosition(-10000);
+//        frontRightMotor.setTargetPosition(-10000);
+//        backRightMotor.setTargetPosition(10000);
+        List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
+        frontLeftMotor.setPower(-0.5);
+        backLeftMotor.setPower(0.5);
+        frontRightMotor.setPower(0.5);
+        backRightMotor.setPower(-0.5);
 
         while (true) {
             detections = aprilTagProcessor.getDetections();

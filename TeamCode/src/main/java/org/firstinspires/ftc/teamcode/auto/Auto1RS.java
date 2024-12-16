@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
 public class Auto1RS extends LinearOpMode {
-    //Auto code that starts anywhere TO THE RIGHT of the very middle of the field.
+    //Auto code that starts anywhere TO THE RIGHT of the very middle of the field. Preload with 1 (one) specimen.
 
 
     BNO055IMU imu;
@@ -24,13 +24,14 @@ public class Auto1RS extends LinearOpMode {
 
             autoClass.Init(hardwareMap);
             autoClass.CloseClaw();
-            autoClass.Forward(750, 0.5f);
+            autoClass.Forward(850, 0.5f);
             autoClass.Arm(0.85);
             Thread.sleep(1500);
-            autoClass.RightUntilAprilTag();
+
+            autoClass.RightUntilAprilTag(); // This is a major game of chance. If there's any doubt, use the plain Auto1 script.
 
             Thread.sleep(1000);
-            autoClass.Forward(250, 0.5f);
+            autoClass.Forward(150, 0.5f);
 
 
             autoClass.Arm(0.85); //Arm goes up to combat the energy transfer from moving
