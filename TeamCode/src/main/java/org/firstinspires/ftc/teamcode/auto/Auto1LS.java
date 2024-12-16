@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
-public class Auto1RS extends LinearOpMode {
+public class Auto1LS extends LinearOpMode {
     //Auto code that starts anywhere TO THE RIGHT of the very middle of the field. Preload with 1 (one) specimen.
 
 
@@ -28,7 +28,7 @@ public class Auto1RS extends LinearOpMode {
             autoClass.Arm(0.85);
             Thread.sleep(1500);
 
-            autoClass.RightUntilAprilTag(); // If there's any doubt, use the plain Auto1 script.
+            autoClass.LeftUntilAprilTag(); // If there's any doubt, use the plain Auto1 script.
 
             Thread.sleep(1000);
             autoClass.Forward(150, 0.5f);

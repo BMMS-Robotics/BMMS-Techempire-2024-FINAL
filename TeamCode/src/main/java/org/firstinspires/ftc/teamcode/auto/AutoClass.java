@@ -346,14 +346,14 @@ public class AutoClass {
     }
 
     public void RightUntilAprilTag() throws InterruptedException {
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        frontLeftMotor.setTargetPosition(10000);
-//        backLeftMotor.setTargetPosition(-10000);
-//        frontRightMotor.setTargetPosition(-10000);
-//        backRightMotor.setTargetPosition(10000);
+//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setTargetPosition(10000);
+        backLeftMotor.setTargetPosition(-10000);
+        frontRightMotor.setTargetPosition(-10000);
+        backRightMotor.setTargetPosition(10000);
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
         frontLeftMotor.setPower(0.5);
         backLeftMotor.setPower(-0.5);
@@ -374,14 +374,14 @@ public class AutoClass {
 
     }
     public void LeftUntilAprilTag() throws InterruptedException {
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        frontLeftMotor.setTargetPosition(10000);
-//        backLeftMotor.setTargetPosition(-10000);
-//        frontRightMotor.setTargetPosition(-10000);
-//        backRightMotor.setTargetPosition(10000);
+//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setTargetPosition(-10000);
+        backLeftMotor.setTargetPosition(10000);
+        frontRightMotor.setTargetPosition(10000);
+        backRightMotor.setTargetPosition(-10000);
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
         frontLeftMotor.setPower(-0.5);
         backLeftMotor.setPower(0.5);
