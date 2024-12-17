@@ -355,10 +355,10 @@ public class AutoClass {
         frontRightMotor.setTargetPosition(-10000);
         backRightMotor.setTargetPosition(10000);
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
-        frontLeftMotor.setPower(0.5);
-        backLeftMotor.setPower(-0.5);
-        frontRightMotor.setPower(-0.5);
-        backRightMotor.setPower(0.5);
+        frontLeftMotor.setPower(0.25);
+        backLeftMotor.setPower(-0.25);
+        frontRightMotor.setPower(-0.25);
+        backRightMotor.setPower(0.25);
 
         while (true) {
             detections = aprilTagProcessor.getDetections();
@@ -383,10 +383,10 @@ public class AutoClass {
         frontRightMotor.setTargetPosition(10000);
         backRightMotor.setTargetPosition(-10000);
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
-        frontLeftMotor.setPower(-0.5);
-        backLeftMotor.setPower(0.5);
-        frontRightMotor.setPower(0.5);
-        backRightMotor.setPower(-0.5);
+        frontLeftMotor.setPower(-0.25);
+        backLeftMotor.setPower(0.25);
+        frontRightMotor.setPower(0.25);
+        backRightMotor.setPower(-0.25);
 
         while (true) {
             detections = aprilTagProcessor.getDetections();

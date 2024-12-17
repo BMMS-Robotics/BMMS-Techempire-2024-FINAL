@@ -20,6 +20,7 @@ public class EncoderTesting extends LinearOpMode {
         while (opModeIsActive()) {
 
             autoClass.Init(hardwareMap); //Do not touch (Pretty please)
+            Thread.sleep(1500);
             autoClass.LeftUntilAprilTag();
             /*
             autoClass.Right(500, 0.5f);
