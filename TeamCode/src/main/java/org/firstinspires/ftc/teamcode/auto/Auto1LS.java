@@ -28,7 +28,7 @@ public class Auto1LS extends LinearOpMode {
             autoClass.Arm(0.85);
             Thread.sleep(1500);
 
-            autoClass.LeftUntilAprilTag(); // If there's any doubt, use the plain Auto1 script.
+            autoClass.RightUntilAprilTag(); // If there's any doubt, use the plain Auto1 script.
 
             Thread.sleep(1000);
             autoClass.Forward(150, 0.5f);
