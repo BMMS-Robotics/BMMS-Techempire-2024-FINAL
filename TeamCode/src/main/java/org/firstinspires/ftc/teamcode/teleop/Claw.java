@@ -14,12 +14,12 @@ public class Claw {
         clawR = hardwareMap.get(Servo.class, "clawR");
     }
 
-    public void open() {
-        clawL.setPosition(0.425); // i don't know if 1 is open or close (part of why it's helpful to encapsulate logic in classes using methods that are self describing)
-        clawR.setPosition(0.6);
+    public void close() {
+        clawL.setPosition(0.42); // i don't know if 1 is open or close (part of why it's helpful to encapsulate logic in classes using methods that are self describing)
+        clawR.setPosition(0.605);
     }
 
-    public void close() {
+    public void open() {
         clawL.setPosition(0.7);  // i don't know if 0 is open or close
         clawR.setPosition(0.3);
     }

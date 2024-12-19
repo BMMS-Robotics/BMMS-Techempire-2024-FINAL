@@ -326,8 +326,8 @@ public class AutoClass {
     }
 
     public void CloseClaw() {
-        ClawL.setPosition(0.4125);
-        ClawR.setPosition(0.6125);
+        ClawL.setPosition(0.425);
+        ClawR.setPosition(0.6);
     }
     public void OpenClaw() {
         ClawL.setPosition(0.7);

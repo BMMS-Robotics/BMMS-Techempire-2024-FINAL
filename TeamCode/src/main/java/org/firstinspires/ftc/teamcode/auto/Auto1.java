@@ -46,16 +46,18 @@ public class Auto1 extends LinearOpMode {
 
             autoClass.Arm(0.85); //Arm goes up to combat the energy transfer from moving
             Thread.sleep(500); //Sleep to allow arm to move
+            autoClass.CloseClaw();
+            Thread.sleep(500);
 
-            autoClass.extendSlide(2700); //Linear slide goes up high enough to place specimen
+            autoClass.extendSlide(1800); //Linear slide goes up high enough to place specimen
 
             Thread.sleep(2000); //Wait for linear slide
 
-            autoClass.Forward(200, 0.1f); //Forward slightly to properly align specimen
+            autoClass.Forward(150, 0.1f); //Forward slightly to properly align specimen
 
             autoClass.CloseClaw(); // Adjust grip on the claw
 
-            autoClass.extendSlide(1750); //Move slide back down
+            autoClass.extendSlide(100); //Move slide back down
 
             Integer i = 0;
             while (i < 1000) { //Overcomplicated code to force claw closed
@@ -66,7 +68,7 @@ public class Auto1 extends LinearOpMode {
 
                 i += 10;
             }
-            Thread.sleep(400); //More time for linear slide
+            Thread.sleep(750); //More time for linear slide
             autoClass.OpenClaw(); //Release specimen
             Thread.sleep(100); //Time for claw to open
 

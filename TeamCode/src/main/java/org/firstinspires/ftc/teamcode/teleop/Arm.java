@@ -12,7 +12,7 @@ public class Arm {
     //Fun software limits with kaitlyn
     double maxArmPosition = 0.85;
     double minArmPosition = 0.5;
-    double armPositionIncrement = 0.05;
+    double armPositionIncrement = 0.025;
 
     Servo arm;
 

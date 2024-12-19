@@ -23,8 +23,12 @@ public class AutoTemplate extends LinearOpMode {
         while (opModeIsActive()) {
 
             autoClass.Init(hardwareMap); //Do not touch (Pretty please)
-            Thread.sleep(1500);
-            autoClass.RightUntilAprilTag();
+            //Thread.sleep(1500);
+            autoClass.CloseClaw();
+
+
+
+            Thread.sleep(1500); //Time for final commands to finish executing
 
             break;
         }

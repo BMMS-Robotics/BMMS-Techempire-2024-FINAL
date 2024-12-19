@@ -49,11 +49,9 @@ public class Tiffany {
             driveTrain.speedUp();
         }
 
-        if (driverHub.isNavigateToClosestAprilTagButtonPressed()) {
-            sightNav.navigateToClosestTag(driveTrain, telemetry);
-        } else {
-            driveTrain.drive(driverHub.getDriveX(), driverHub.getDriveY(), driverHub.getDriveRX());
-        }
+
+        driveTrain.drive(driverHub.getDriveX(), driverHub.getDriveY(), driverHub.getDriveRX());
+
 
         // ADJUST CLAW open or close per revDriverHub input
         if (driverHub.isOpenClawButtonPressed()) {
@@ -82,10 +80,10 @@ public class Tiffany {
 
     public void updateTelemetry(Telemetry telemetry) {
         // collect telemetry from controllers to help with debugging
-        //driveTrain.updateTelemetry(telemetry);
-        //claw.updateTelemetry(telemetry);
-        //linearSlide.updateTelemetry(telemetry);
-        //arm.updateTelemetry(telemetry);
+        driveTrain.updateTelemetry(telemetry);
+        claw.updateTelemetry(telemetry);
+        linearSlide.updateTelemetry(telemetry);
+        arm.updateTelemetry(telemetry);
         telemetry.update();
     }
 }
