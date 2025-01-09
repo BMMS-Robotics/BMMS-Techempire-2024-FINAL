@@ -7,24 +7,28 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Arm {
 
-    double targetPosition = 0.85; // Should this equal the maxArmPosition instead of 1?
+    // Class for arm logic
 
-    //Fun software limits with kaitlyn
+    // Variables
+
+    // Floats
+    double targetPosition = 0.85; // Should this equal the maxArmPosition instead of 1?
     double maxArmPosition = 0.85;
     double minArmPosition = 0.5;
     double armPositionIncrement = 0.025;
 
+    // Hardware
     Servo arm;
 
-    public Arm(HardwareMap hardwareMap) {
+    public Arm(HardwareMap hardwareMap) { // Arm init
         arm = hardwareMap.get(Servo.class, "arm");
     }
 
-    public void moveUp() {
+    public void moveUp() { // Move the arm up (towards linear slide)
         setTargetPosition(targetPosition + armPositionIncrement);
     }
 
-    public void moveDown() {
+    public void moveDown() { // Move the arm down (towards the ground)
         setTargetPosition(targetPosition - armPositionIncrement);
     }
 

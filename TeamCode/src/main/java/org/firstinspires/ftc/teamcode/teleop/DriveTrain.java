@@ -7,16 +7,26 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class DriveTrain {
-    DcMotor frontLeftMotor;
-    DcMotor backLeftMotor;
-    DcMotor frontRightMotor;
-    DcMotor backRightMotor;
+
+    // Class for drive train logic
+
+    //Variables
+
+    //Values
     double slowMo = 2.5;
     double slowMoMax = 7.5;
     double slowMoMin = 1.5;
     double slowMoChangeSpeed = 0.5;
 
-    public DriveTrain(HardwareMap hardwareMap) {
+    //Hardware
+
+    DcMotor frontLeftMotor;
+    DcMotor backLeftMotor;
+    DcMotor frontRightMotor;
+    DcMotor backRightMotor;
+
+
+    public DriveTrain(HardwareMap hardwareMap) { //DriveTrain init
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
@@ -37,11 +47,14 @@ public class DriveTrain {
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void drive(double x, double y, double rx) {
-        //POTENTIAL add slow-mo toggle
-        double y_adjusted = y / slowMo; // Remember, Y stick value is (no longer) reversed
-        double x_adjusted = -x * 1.1 / slowMo; // Counteract imperfect strafing
-        double rx_adjusted = -rx / slowMo;
+    public void drive(double x, double y, double rx) { //
+        // Modify a set of variables based on the values of the joysticks.
+
+        //Note that despite the name, rx is actually the left stick. Sorry.
+
+        double y_adjusted = y / slowMo; //Moving forward/backward by pushing the right stick forward/back
+        double x_adjusted = -x * 1.1 / slowMo; //Strafing by pushing the right joystick to the left/right
+        double rx_adjusted = -rx / slowMo; //Turning by pushing the left joystick left/right
 
         // Denominator is the largest motor power (absolute value) or 1
         // This ensures all the powers maintain the same ratio,
@@ -52,20 +65,21 @@ public class DriveTrain {
         double frontRightPower = (y_adjusted - x_adjusted - rx_adjusted) / denominator;
         double backRightPower = (y_adjusted + x_adjusted - rx_adjusted) / denominator;
 
+        //Set motor powers
         frontLeftMotor.setPower(frontLeftPower);
         backLeftMotor.setPower(backLeftPower);
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
     }
 
-    public void slowDown() {
+    public void slowDown() { //Changes the slow motion factor when x button is pressed
         slowMo += slowMoChangeSpeed;
         if (slowMo > slowMoMax) {
             slowMo = slowMoMax;
         }
     }
 
-    public void speedUp() {
+    public void speedUp() { //Changes the slow motion factor when b button is pressed
         slowMo -= slowMoChangeSpeed;
         if (slowMo < slowMoMin) {
             slowMo = slowMoMin;

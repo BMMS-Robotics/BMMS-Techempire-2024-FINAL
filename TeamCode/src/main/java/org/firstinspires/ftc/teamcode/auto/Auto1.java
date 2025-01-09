@@ -53,7 +53,7 @@ public class Auto1 extends LinearOpMode {
 
             Thread.sleep(2000); //Wait for linear slide
 
-            autoClass.Forward(150, 0.1f); //Forward slightly to properly align specimen
+            autoClass.Forward(175, 0.1f); //Forward slightly to properly align specimen
 
             autoClass.CloseClaw(); // Adjust grip on the claw
 

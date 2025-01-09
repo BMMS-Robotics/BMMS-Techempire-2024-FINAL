@@ -3,17 +3,27 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class RevDriverHub {
+    /*
+    This class is the true hardware init for the rest of the code.
+    It is referenced by Tiffany.java as a middleman between the driver hub
+    and our software
+
+    */
+
+
     private final Gamepad gamePad1;
     private final Gamepad gamePad2;
 
     private final PlayerMode playerMode;
 
+    //Get gamepads
     public RevDriverHub(PlayerMode playerMode, Gamepad gamepad1, Gamepad gamepad2) {
         this.playerMode = playerMode;
         this.gamePad1 = gamepad1;
         this.gamePad2 = gamepad2;
     }
 
+    //Process controller inputs
     public double getDriveX() {
         return gamePad1.right_stick_x;
     }

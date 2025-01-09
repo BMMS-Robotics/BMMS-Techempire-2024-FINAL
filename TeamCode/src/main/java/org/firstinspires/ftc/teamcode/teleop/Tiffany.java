@@ -41,6 +41,9 @@ public class Tiffany {
      * I'll randomly fail in bizarre ways in tournaments. That'll show them.
      * @param driverHub
      */
+
+    //Processing the gamepad inputs and controlling the rest of the bot.
+    //Basically the middleman between RevDriverHub and the rest of the code
     public void processDriverCommands(RevDriverHub driverHub, Telemetry telemetry) {
         // ADJUST DriveTrain per revDriverHub input
         if (driverHub.slowDownButtonPressed()) {

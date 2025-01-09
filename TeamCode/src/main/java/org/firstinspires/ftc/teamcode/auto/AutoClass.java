@@ -46,24 +46,27 @@ public class AutoClass {
         ClawL = hardwareMap.servo.get("clawL");
         ClawR = hardwareMap.servo.get("clawR");
 
-
+        //Reverse motors for simplicity
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        //Have motors stop and resist external movements when power is set to 0 to counteract drift.
+        //Note: If a program is running and the power is set to 0, do not roll the bot. This puts stress on the brakes. They're already stressed about finals.
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        //Encoder init for linear slide
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        //Encoder init for drive train
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
 
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -78,6 +81,8 @@ public class AutoClass {
                 hardwareMap.get(WebcamName.class, "Webcam 1"),
                 aprilTagProcessor
         );
+
+
     }
 
     //1 ft per 360 ms
