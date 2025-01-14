@@ -15,7 +15,7 @@ public class Arm {
     double targetPosition = 0.85; // Should this equal the maxArmPosition instead of 1?
     double maxArmPosition = 0.85;
     double minArmPosition = 0.5;
-    double armPositionIncrement = 0.025;
+    double armPositionIncrement = 0.02;
 
     // Hardware
     Servo arm;

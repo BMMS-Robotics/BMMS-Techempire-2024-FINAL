@@ -15,7 +15,7 @@ public class DriveTrain {
     //Values
     double slowMo = 2.5;
     double slowMoMax = 7.5;
-    double slowMoMin = 1.5;
+    double slowMoMin = 2.5;
     double slowMoChangeSpeed = 0.5;
 
     //Hardware
