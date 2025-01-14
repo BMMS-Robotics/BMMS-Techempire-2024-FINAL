@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
 public class Auto1LS extends LinearOpMode {
-    //Auto code that starts anywhere TO THE RIGHT of the very middle of the field. Preload with 1 (one) specimen.
+    //Auto code that starts anywhere TO THE LEFT of the very middle of the field. Preload with 1 (one) specimen.
 
 
     BNO055IMU imu;

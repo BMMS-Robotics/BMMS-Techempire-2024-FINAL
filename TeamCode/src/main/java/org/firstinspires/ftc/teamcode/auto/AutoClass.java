@@ -64,7 +64,6 @@ public class AutoClass {
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Have motors stop and resist external movements when power is set to 0 to counteract drift.
-        //Note: If a program is running and the power is set to 0, do not roll the bot. This puts stress on the brakes. They're already stressed about finals.
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -98,27 +97,6 @@ public class AutoClass {
 
     }
 
-    //1 ft per 360 ms
-
-    public void EncoderTest(int ticks, float power) throws InterruptedException {
-        frontLeftMotor.setTargetPosition(ticks);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setTargetPosition(ticks);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightMotor.setTargetPosition(ticks);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setTargetPosition(ticks);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        while (frontLeftMotor.getCurrentPosition() < ticks) {
-            //Wait
-        }
-
-//
-    }
     public void Forward(int ticks, float power) throws InterruptedException { //Move forward using encoders.
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
