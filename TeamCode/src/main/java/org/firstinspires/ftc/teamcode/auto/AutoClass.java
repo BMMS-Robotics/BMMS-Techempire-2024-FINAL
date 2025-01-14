@@ -18,6 +18,19 @@ import java.util.List;
 
 
 public class AutoClass {
+
+    // The main class for autonomous code.
+
+    // Variables
+
+    //Values
+    public static int TARGET_POSITION_TICKS = 0; // -UNUSED-
+
+    int POSITION_TOLERANCE = 10;
+
+    int MAX_EXTEND_HEIGHT = 3850;
+
+    //Hardware
     DcMotor frontLeftMotor;
     DcMotor backLeftMotor;
     DcMotor frontRightMotor;
@@ -29,13 +42,11 @@ public class AutoClass {
     private VisionPortal visionPortal;
     private AprilTagProcessor aprilTagProcessor;
 
-    public static int TARGET_POSITION_TICKS = 0; // -UNUSED-
-    int POSITION_TOLERANCE = 10;
+    
 
-    int MAX_EXTEND_HEIGHT = 3850;
+    public void Init(HardwareMap hardwareMap) { //Initialize motors
 
-    public void Init(HardwareMap hardwareMap) {
-
+        //Define and map motors & servos
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
@@ -46,12 +57,13 @@ public class AutoClass {
         ClawL = hardwareMap.servo.get("clawL");
         ClawR = hardwareMap.servo.get("clawR");
 
+        //Modify motors & servos
+
         //Reverse motors for simplicity
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Have motors stop and resist external movements when power is set to 0 to counteract drift.
-        //Note: If a program is running and the power is set to 0, do not roll the bot. This puts stress on the brakes. They're already stressed about finals.
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -85,28 +97,7 @@ public class AutoClass {
 
     }
 
-    //1 ft per 360 ms
-
-    public void EncoderTest(int ticks, float power) throws InterruptedException {
-        frontLeftMotor.setTargetPosition(ticks);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setTargetPosition(ticks);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightMotor.setTargetPosition(ticks);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setTargetPosition(ticks);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setPower(power);
-        backLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-        backRightMotor.setPower(power);
-        while (frontLeftMotor.getCurrentPosition() < ticks) {
-            //Wait
-        }
-
-//
-    }
-    public void Forward(int ticks, float power) throws InterruptedException {
+    public void Forward(int ticks, float power) throws InterruptedException { //Move forward using encoders.
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -136,7 +127,7 @@ public class AutoClass {
         }
     }
 
-    public void Backward(int ticks, float power) throws InterruptedException {
+    public void Backward(int ticks, float power) throws InterruptedException { //Move backward using encoders.
 
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -168,7 +159,7 @@ public class AutoClass {
         }
     }
 
-    public void Left(int ticks, float power) throws InterruptedException {
+    public void Left(int ticks, float power) throws InterruptedException { //Move left using encoders.
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -199,7 +190,7 @@ public class AutoClass {
         }
     }
 
-    public void Right(int ticks, float power) throws InterruptedException {
+    public void Right(int ticks, float power) throws InterruptedException { //Move right using encoders.
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -230,7 +221,7 @@ public class AutoClass {
         }
     }
 
-    public void TurnLeft(int ticks, float power) throws InterruptedException {
+    public void TurnLeft(int ticks, float power) throws InterruptedException { //Turn left using encoders
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -256,7 +247,7 @@ public class AutoClass {
         }
     }
 
-    public void TurnRight(int ticks, float power) throws InterruptedException {
+    public void TurnRight(int ticks, float power) throws InterruptedException { //Turn right using encoders.
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -282,7 +273,7 @@ public class AutoClass {
     }
 
 
-    public void LinearSlideController(DcMotor motor) {
+    public void LinearSlideController(DcMotor motor) { //Linear slide init, unused
         //Magical initialization stuff
         this.slideMotor = motor;
 
@@ -300,7 +291,7 @@ public class AutoClass {
         //slideMotor.setPower(0);
     }
 
-    public void extendSlide(int targetPos) {
+    public void extendSlide(int targetPos) { //Move the linear slide to the target position.
         //set target position and move to it i guess
         slideMotor.setTargetPosition(targetPos);
         slideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -330,17 +321,17 @@ public class AutoClass {
         }
     }
 
-    public void CloseClaw() {
+    public void CloseClaw() { //Close claw... maybe?
         ClawL.setPosition(0.425);
         ClawR.setPosition(0.6);
     }
-    public void OpenClaw() {
+    public void OpenClaw() { //Open claw maybe?
         ClawL.setPosition(0.7);
         ClawR.setPosition(0.3);
     }
 
     public void Arm(double pos) {
-        //Just a precaution...
+        //Set limits to prevent arm slamming against the bot or the wall.
         if (pos > 0.85) {
             pos = 0.85; //Oh no you don't
         }
@@ -350,22 +341,23 @@ public class AutoClass {
         arm.setPosition(pos);
     }
 
-    public void RightUntilAprilTag() throws InterruptedException {
-//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    public void RightUntilAprilTag() throws InterruptedException { //Move right until it sees an AprilTag.
+        //Set motor targets to a distant value
         frontLeftMotor.setTargetPosition(10000);
         backLeftMotor.setTargetPosition(-10000);
         frontRightMotor.setTargetPosition(-10000);
         backRightMotor.setTargetPosition(10000);
-        List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
+    
+        //Process apriltags
+        List<AprilTagDetection> detections = aprilTagProcessor.getDetections(); 
+
+        //Move motors
         frontLeftMotor.setPower(0.25);
         backLeftMotor.setPower(-0.25);
         frontRightMotor.setPower(-0.25);
         backRightMotor.setPower(0.25);
 
-        while (true) {
+        while (true) { //Check if an AprilTag is in sight, if so, stop the motors.
             detections = aprilTagProcessor.getDetections();
             if (!detections.isEmpty()) {
                 frontLeftMotor.setPower(0);
@@ -378,22 +370,23 @@ public class AutoClass {
         }
 
     }
-    public void LeftUntilAprilTag() throws InterruptedException {
-//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    public void LeftUntilAprilTag() throws InterruptedException { //Move left until it sees an apriltag
+        //Set motor targets to a distant value
         frontLeftMotor.setTargetPosition(-10000);
         backLeftMotor.setTargetPosition(10000);
         frontRightMotor.setTargetPosition(10000);
         backRightMotor.setTargetPosition(-10000);
+
+        //Process apriltags
         List<AprilTagDetection> detections = aprilTagProcessor.getDetections();
+
+        //Move motors
         frontLeftMotor.setPower(-0.25);
         backLeftMotor.setPower(0.25);
         frontRightMotor.setPower(0.25);
         backRightMotor.setPower(-0.25);
 
-        while (true) {
+        while (true) { //Check if an apriltag is in sight, if so, stop the motors.
             detections = aprilTagProcessor.getDetections();
             if (!detections.isEmpty()) {
                 frontLeftMotor.setPower(0);

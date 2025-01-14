@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous
-public class EncoderTesting extends LinearOpMode {
+public class RightUntilAprilTag extends LinearOpMode {
     BNO055IMU imu;
     @Override
     public void runOpMode() throws InterruptedException {

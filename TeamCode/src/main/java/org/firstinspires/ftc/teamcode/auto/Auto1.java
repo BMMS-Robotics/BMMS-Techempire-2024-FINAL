@@ -9,28 +9,14 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
 public class Auto1 extends LinearOpMode {
-//    DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-//    DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-//    DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-//    DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-//    DcMotor extend = hardwareMap.dcMotor.get("linearSlide");
-
-    //Robot moves roughly 3.8ft/sec (45in/sec) (114cm/sec) at 100% power according to my back-of-the-envelope math
-    //Henceforth moves *ROUGHLy* 1 foot per 360ms
-    //At 0.5% then 720ms
-    //Still at .5 to move forward 1 tile then 1140ms
-
 
     BNO055IMU imu;
     @Override
     public void runOpMode() throws InterruptedException {
 
-        // // Declare our motors
-        // // Make sure your ID's match your configuration
         AutoClass autoClass = new AutoClass();
 
         //Autonomous code, no usage of vision. Starts with 1 (one) preloaded specimen directly at the center of the wall.
-
 
         waitForStart();
 
@@ -38,7 +24,7 @@ public class Auto1 extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            autoClass.Init(hardwareMap);
+            autoClass.Init(hardwareMap); //Initialize motors and whatnot
 
 
             autoClass.Forward(1000, 0.5f);

@@ -21,12 +21,12 @@ public class Claw {
     }
 
     public void close() { //Close the claw
-        clawL.setPosition(0.42); // i don't know if 1 is open or close (part of why it's helpful to encapsulate logic in classes using methods that are self describing)
+        clawL.setPosition(0.42); 
         clawR.setPosition(0.605);
     }
 
     public void open() { //Open the claw
-        clawL.setPosition(0.7);  // i don't know if 0 is open or close
+        clawL.setPosition(0.7); 
         clawR.setPosition(0.3);
     }
 
