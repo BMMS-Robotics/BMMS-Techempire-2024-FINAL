@@ -30,6 +30,11 @@ public class AutoClass {
 
     int MAX_EXTEND_HEIGHT = 3850;
 
+    double ClawLClosed = 0.425;
+    double ClawRClosed = 0.6;
+    double ClawLOpen = 0.7;
+    double ClawROpen = 0.3;
+
     //Hardware
     DcMotor frontLeftMotor;
     DcMotor backLeftMotor;
@@ -329,6 +334,24 @@ public class AutoClass {
         ClawL.setPosition(0.7);
         ClawR.setPosition(0.3);
     }
+    public void MaintainClosed(double time) throws InterruptedException { //Was not written in Android Studio, likely will not compile
+        ClawL.setPosition(ClawLClosed);
+        ClawR.setPosition(ClawRClosed);
+        bool done = false
+        float x = 0
+        while (True) {
+            if (ClawL.getPosition() != ClawLClosed || ClawR.getPosition() != ClawRClosed) {
+                ClawL.setPosition(ClawLClosed);
+                ClawR.setPosition(ClawRClosed);
+            }
+            thread.sleep(5);
+            x += 5;
+            if (x >= time) {
+                break();
+            }
+        
+    }
+    
 
     public void Arm(double pos) {
         //Set limits to prevent arm slamming against the bot or the wall.
