@@ -18,6 +18,10 @@ public class Auto1 extends LinearOpMode {
 
         //Autonomous code, no usage of vision. Starts with 1 (one) preloaded specimen directly at the center of the wall.
 
+
+        // IMPORTANT NOTE TO SELF
+        //
+
         waitForStart();
 
         if (isStopRequested()) return;
@@ -46,14 +50,8 @@ public class Auto1 extends LinearOpMode {
             autoClass.extendSlide(100); //Move slide back down
 
             Integer i = 0;
-            while (i < 1000) { //Overcomplicated code to force claw closed
-                autoClass.CloseClaw();
-                telemetry.addData(i.toString(), null);
-                telemetry.update();
-                Thread.sleep(10);
+            autoClass.MaintainClosed(750);
 
-                i += 10;
-            }
             Thread.sleep(750); //More time for linear slide
             autoClass.OpenClaw(); //Release specimen
             Thread.sleep(100); //Time for claw to open

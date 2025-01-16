@@ -30,6 +30,11 @@ public class AutoClass {
 
     int MAX_EXTEND_HEIGHT = 3850;
 
+    double ClawLClosed = 0.425;
+    double ClawRClosed = 0.6;
+    double ClawLOpen = 0.7;
+    double ClawROpen = 0.3;
+
     //Hardware
     DcMotor frontLeftMotor;
     DcMotor backLeftMotor;
@@ -329,6 +334,25 @@ public class AutoClass {
         ClawL.setPosition(0.7);
         ClawR.setPosition(0.3);
     }
+    public void MaintainClosed(double time) throws InterruptedException {
+        //Close claw
+        ClawL.setPosition(ClawLClosed);
+        ClawR.setPosition(ClawRClosed);
+        float x = 0;
+        while (true) { //Loop until done to continually force claw closed
+            if (ClawL.getPosition() != ClawLClosed || ClawR.getPosition() != ClawRClosed) { //If the claw is not in its closed position, close it.
+                ClawL.setPosition(ClawLClosed);
+                ClawR.setPosition(ClawRClosed);
+            }
+            Thread.sleep(5); //Sleep, change value
+            x += 5;
+            if (x >= time) { //If it's waited for long enough, break the loop and continue the auto program
+                break;
+            }
+        
+        }
+    }
+    
 
     public void Arm(double pos) {
         //Set limits to prevent arm slamming against the bot or the wall.
