@@ -334,19 +334,19 @@ public class AutoClass {
         ClawL.setPosition(0.7);
         ClawR.setPosition(0.3);
     }
-    public void MaintainClosed(double time) throws InterruptedException { //Was not written in Android Studio, likely will not compile
+    public void MaintainClosed(double time) throws InterruptedException {
+        //Close claw
         ClawL.setPosition(ClawLClosed);
         ClawR.setPosition(ClawRClosed);
-        boolean done = false;
         float x = 0;
-        while (true) {
-            if (ClawL.getPosition() != ClawLClosed || ClawR.getPosition() != ClawRClosed) {
+        while (true) { //Loop until done to continually force claw closed
+            if (ClawL.getPosition() != ClawLClosed || ClawR.getPosition() != ClawRClosed) { //If the claw is not in its closed position, close it.
                 ClawL.setPosition(ClawLClosed);
                 ClawR.setPosition(ClawRClosed);
             }
-            Thread.sleep(5);
+            Thread.sleep(5); //Sleep, change value
             x += 5;
-            if (x >= time) {
+            if (x >= time) { //If it's waited for long enough, break the loop and continue the auto program
                 break;
             }
         
