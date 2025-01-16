@@ -18,6 +18,10 @@ public class Auto1 extends LinearOpMode {
 
         //Autonomous code, no usage of vision. Starts with 1 (one) preloaded specimen directly at the center of the wall.
 
+
+        // IMPORTANT NOTE TO SELF
+        //
+
         waitForStart();
 
         if (isStopRequested()) return;
