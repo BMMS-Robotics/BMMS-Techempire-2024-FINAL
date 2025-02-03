@@ -77,6 +77,10 @@ public class AutoClass {
     well
 
 
+    Maybe using static final double COUNTS_PER_MOTOR_REV = 1440; will do something
+
+    LOOK aT THE VARIABLES FOR THE MORE FINAL MATH STUFF IDK
+
      */
     // endregion
 
@@ -94,7 +98,12 @@ public class AutoClass {
         arm = hardwareMap.servo.get("arm");
         ClawL = hardwareMap.servo.get("clawL");
         ClawR = hardwareMap.servo.get("clawR");
-        //Modify motors & servos
+        //Modify motors & servo
+        //Do math and research to figure out the counts per motor revolution on the GoBilda 5203
+        final double     COUNTS_PER_MOTOR_REV    = 1440;    // Figure out later
+        final double     DRIVE_GEAR_REDUCTION    = 1.0;     // 1.0 is no external gearing, figure out later
+        final double     WHEEL_DIAMETER_INCHES   = 2.0;     // For figuring circumference
+        final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
 
         //Reverse motors for simplicity
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
