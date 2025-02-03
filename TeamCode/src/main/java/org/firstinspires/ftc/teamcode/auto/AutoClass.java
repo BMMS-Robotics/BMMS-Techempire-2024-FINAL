@@ -47,6 +47,39 @@ public class AutoClass {
     private VisionPortal visionPortal;
     private AprilTagProcessor aprilTagProcessor;
 
+    // region Math
+    /*
+    Wheel diameter is 2 inches, meaning radius is 1in
+    Circumfrence is 3.14
+    So 1 full rotation would theoretically bring the bot forward 3.14 inches
+    GoBilda Yellow Jacket has 600 RPM (i think) so 1884 inches/min or 157 ft/min
+    300 RPM at 0.5x speed, 942 in/min, 78.5 ft/min,
+
+
+    15.7 inches/second at 0.5 speed
+
+    Encoder resolution is 537.7 PPR, so maybe 538 ticks per rotation? Try at home
+
+    (inches / 3.14) is the rotations needed to travel that distance
+     * 538 = the ticks needed for that distance (i think)
+
+     so apparently if you wanted to go forward 1 inch it would be 172 ticks
+
+
+    1 foot:
+
+    (12 / 3.14) * 538
+    3.82 * 538 = 2055.16 ticks, probably apply a floor, celing or round operand on each step
+    round to 2055 ticks
+    And that should be one foot
+    which doesn't sound right
+
+    well
+
+
+     */
+    // endregion
+
     
 
     public void Init(HardwareMap hardwareMap) { //Initialize motors
