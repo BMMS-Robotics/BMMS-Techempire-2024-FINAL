@@ -100,10 +100,22 @@ public class AutoClass {
         ClawR = hardwareMap.servo.get("clawR");
         //Modify motors & servo
         //Do math and research to figure out the counts per motor revolution on the GoBilda 5203
-        final double     COUNTS_PER_MOTOR_REV    = 1440;    // Figure out later
+        final double     COUNTS_PER_MOTOR_REV    = 538;    // Figure out later
         final double     DRIVE_GEAR_REDUCTION    = 1.0;     // 1.0 is no external gearing, figure out later
-        final double     WHEEL_DIAMETER_INCHES   = 2.0;     // For figuring circumference
-        final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+        final double     WHEEL_DIAMETER_INCHES   = 4.0;     // For figuring circumference
+        //final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+        final double COUNTS_PER_INCH = 1028;
+
+        //say 538 per revolution, to go 1 foot you would need 6.28 revolutions
+        // 6.28 * 538 = 1027.58 rount to 1028 (nice round number)
+
+        //IMPORTANT
+        //1 foot = 1028 ticks
+
+        //Too much? Too little? who knows.
+        //To find counts per motor revolution, maybe slowly turn motor by
+        //increments of 100 ticks, mark part of the wheel, and count ticks
+        //until a full revolution.
 
         //Reverse motors for simplicity
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -142,9 +154,42 @@ public class AutoClass {
 
 
     }
-
+    /*
     public void Forward(int ticks, float power) throws InterruptedException { //Move forward using encoders.
         //region MotorInit
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setTargetPosition(ticks);
+        backLeftMotor.setTargetPosition(ticks);
+        frontRightMotor.setTargetPosition(ticks);
+        backRightMotor.setTargetPosition(ticks);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //endregion
+
+        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+        backRightMotor.setPower(power);
+        while (frontLeftMotor.getCurrentPosition() < ticks) {
+            //Wait
+        }
+    }
+    */
+
+
+    public void Forward(int inches, float power) throws InterruptedException { //Move forward using encoders.
+        //region MotorInit
+        int ticks = (int)(538/(4*3.1415)) * inches;
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

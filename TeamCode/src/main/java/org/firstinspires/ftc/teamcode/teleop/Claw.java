@@ -21,8 +21,8 @@ public class Claw {
     }
 
     public void close() { //Close the claw
-        clawL.setPosition(0.42); 
-        clawR.setPosition(0.605);
+        clawL.setPosition(0.415);
+        clawR.setPosition(0.615);
     }
 
     public void open() { //Open the claw

@@ -31,7 +31,7 @@ public class Auto1 extends LinearOpMode {
             autoClass.Init(hardwareMap); //Initialize motors and whatnot
 
 
-            autoClass.Forward(1000, 0.5f);
+            autoClass.Forward(1028, 0.5f);
 
 
             autoClass.Arm(0.85); //Arm goes up to combat the energy transfer from moving
