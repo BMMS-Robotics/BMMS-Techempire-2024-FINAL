@@ -219,8 +219,8 @@ public class AutoClass {
         }
     }
 
-    public void Backward(int ticks, float power) throws InterruptedException { //Move backward using encoders.
-
+    public void Backward(int inches, float power) throws InterruptedException { //Move backward using encoders.
+        int ticks = (int)(538/(4*3.1415)) * inches;
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -251,7 +251,8 @@ public class AutoClass {
         }
     }
 
-    public void Left(int ticks, float power) throws InterruptedException { //Move left using encoders.
+    public void Left(int inches, float power) throws InterruptedException { //Move left using encoders.
+        int ticks = (int)(538/(4*3.1415)) * inches;
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -282,7 +283,8 @@ public class AutoClass {
         }
     }
 
-    public void Right(int ticks, float power) throws InterruptedException { //Move right using encoders.
+    public void Right(int inches, float power) throws InterruptedException { //Move right using encoders.
+        int ticks = (int)(538/(4*3.1415)) * inches;
         //region MotorInit
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -313,13 +315,20 @@ public class AutoClass {
         }
     }
 
-    public void TurnLeft(int ticks, float power) throws InterruptedException { //Turn left using encoders
+    public void TurnLeft(double degrees, float power) throws InterruptedException { //Turn left using encoders
+        int inches = (int)(23 * (degrees / 90));
+        int ticks = (int)((538/(4*3.1415)) * inches);
         //region MotorInit
-        /*
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         frontLeftMotor.setTargetPosition(-ticks);
         backLeftMotor.setTargetPosition(-ticks);
         frontRightMotor.setTargetPosition(ticks);
@@ -330,28 +339,30 @@ public class AutoClass {
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-         */
+         /*
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+          */
 
         //endregion
         frontLeftMotor.setPower(-power);
         backLeftMotor.setPower(-power);
         frontRightMotor.setPower(power);
         backRightMotor.setPower(power);
-        Thread.sleep(ticks);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-//        while (frontLeftMotor.getCurrentPosition() > -ticks) {
-//            //Wait
-//        }
+//        Thread.sleep(ticks);
+//        frontLeftMotor.setPower(0);
+//        backLeftMotor.setPower(0);
+//        frontRightMotor.setPower(0);
+//        backRightMotor.setPower(0);
+        while (frontLeftMotor.getCurrentPosition() > -ticks) {
+            //Wait
+        }
     }
 
-    public void TurnRight(int ticks, float power) throws InterruptedException { //Turn right using encoders.
+    public void TurnRight(double degrees, float power) throws InterruptedException { //Turn right using encoders.
         //region MotorInit
         /*
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -368,21 +379,41 @@ public class AutoClass {
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+
+
          */
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        int inches = (int)(23 * (degrees / 90));
+        int ticks = (int)((538/(4*3.1415)) * inches);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontLeftMotor.setTargetPosition(ticks);
+        backLeftMotor.setTargetPosition(ticks);
+        frontRightMotor.setTargetPosition(-ticks);
+        backRightMotor.setTargetPosition(-ticks);
+
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         //endregion
         frontLeftMotor.setPower(power);
         backLeftMotor.setPower(power);
         frontRightMotor.setPower(-power);
         backRightMotor.setPower(-power);
-        Thread.sleep(ticks);
-        frontLeftMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
+
+        while (frontLeftMotor.getCurrentPosition() > ticks) {
+            //Wait
+        }
     }
 
 
