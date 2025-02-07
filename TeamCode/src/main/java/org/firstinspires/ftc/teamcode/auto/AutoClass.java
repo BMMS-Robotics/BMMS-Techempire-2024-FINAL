@@ -26,7 +26,7 @@ public class AutoClass {
     //Values
     public static int TARGET_POSITION_TICKS = 0; // -UNUSED-
 
-    int POSITION_TOLERANCE = 10;
+    int POSITION_TOLERANCE = 0;
 
     int MAX_EXTEND_HEIGHT = 3850;
 
@@ -126,8 +126,10 @@ public class AutoClass {
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slideMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Encoder init for linear slide
+
         slideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideMotor.setDirection(DcMotorSimple.Direction.REVERSE);

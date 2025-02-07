@@ -21,7 +21,7 @@ public class AutoTesting extends LinearOpMode {
 
             autoClass.Init(hardwareMap); //Do not touch (Pretty please)
 
-            //autoClass.Forward(12, 0.5f);
+            autoClass.Forward(1000, 0.5f);
             autoClass.TurnLeft(90, 0.5f);
             autoClass.TurnRight(90, 0.5f);
             

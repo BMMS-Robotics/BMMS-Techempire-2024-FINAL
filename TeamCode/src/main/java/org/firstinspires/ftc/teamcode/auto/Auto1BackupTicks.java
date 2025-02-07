@@ -3,12 +3,9 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
-public class Auto1 extends LinearOpMode {
+public class Auto1BackupTicks extends LinearOpMode {
 
     BNO055IMU imu;
     @Override
@@ -31,7 +28,7 @@ public class Auto1 extends LinearOpMode {
             autoClass.Init(hardwareMap); //Initialize motors and whatnot
 
 
-            autoClass.Forward(26, 0.5f);
+            autoClass.Forward(1028, 0.5f);
 
 
             autoClass.Arm(0.85); //Arm goes up to combat the energy transfer from moving
@@ -43,7 +40,7 @@ public class Auto1 extends LinearOpMode {
 
             Thread.sleep(2000); //Wait for linear slide
 
-            autoClass.Forward(2, 0.1f); //Forward slightly to properly align specimen
+            autoClass.Forward(165, 0.1f); //Forward slightly to properly align specimen
 
             autoClass.CloseClaw(); // Adjust grip on the claw
 
@@ -60,9 +57,9 @@ public class Auto1 extends LinearOpMode {
             Thread.sleep(750); //Time for slide to go down
             autoClass.extendSlide(0); //Still having it going down just ignore this part
 
-            autoClass.Backward(26, 0.5f); //Move backwards (obviously)
+            autoClass.Backward(1000, 0.5f); //Move backwards (obviously)
 
-            autoClass.Right(48, 0.5f); //Move right to park
+            autoClass.Right(2000, 0.5f); //Move right to park
 
             //Wow much productivity
             Thread.sleep(1000);
