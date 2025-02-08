@@ -26,7 +26,7 @@ public class AutoSample extends LinearOpMode {
             //send or show me a screenshot and you will win
             autoClass.Forward(12, 0.5f);
             autoClass.TurnLeft(90, 0.5f);
-            autoClass.Forward(12, 0.5f);
+            autoClass.Forward(4, 0.5f);
             autoClass.TurnLeft(50, 0.5f);
             autoClass.Right(10, 0.5f);
             autoClass.extendSlide(3800);
@@ -43,11 +43,12 @@ public class AutoSample extends LinearOpMode {
 
             autoClass.Backward(10, 0.5f);
             autoClass.extendSlide(1);
-            autoClass.TurnRight(140, 0.5f);
+            autoClass.TurnRight(135, 0.5f);
 
             Thread.sleep(1500);
 
-            autoClass.Forward(2, 0.5f);
+            autoClass.Forward(4, 0.5f);
+            autoClass.Right(2, 0.5f);
             autoClass.Arm(0.5);
 
             Thread.sleep(2000);
@@ -57,16 +58,18 @@ public class AutoSample extends LinearOpMode {
             Thread.sleep(1000);
 
             autoClass.Arm(0.85);
+            autoClass.Backward(4, 0.5f);
+            autoClass.Left(2, 0.5f);
 
             Thread.sleep(500);
 
-            autoClass.TurnLeft(140, 0.5f);
-            autoClass.Forward(6, 0.5f);
+            autoClass.TurnLeft(135, 0.5f);
             autoClass.extendSlide(3800);
+            autoClass.Left(6, 0.5f);
 
-            Thread.sleep(1500);
+            Thread.sleep(500);
 
-            autoClass.Forward(6, 0.5f);
+            autoClass.Forward(10, 0.5f);
             autoClass.OpenClaw();
 
 
